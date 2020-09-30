@@ -10,6 +10,6 @@
   <text>infomation</text>
 </view> 
   <view class="item_text">备注：  
-    <text>infomation</text>
+    <textarea>infomation</textarea>
   </view>
 </view>
