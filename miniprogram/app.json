@@ -1,0 +1,41 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/game/game",
+    "pages/mine/mine",
+    "pages/logs/logs",
+    "pages/table/table",
+    "pages/table1/table1",
+    "pages/table2/table2"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#f6f6f6",
+    "navigationBarTitleText": "哈深体育平台",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "selectedColor": "#2699FB",
+    "color": "B6B6B6",
+    "list":[
+       {
+        "pagePath": "pages/index/index",
+        "text":"约球",
+        "iconPath": "images/play.png",
+        "selectedIconPath": "images/splay.png"
+      },{
+        "pagePath": "pages/game/game",
+        "text":"报名",
+        "iconPath": "images/game.png",
+        "selectedIconPath": "/images/sgame.png"
+      },{
+        "pagePath": "pages/mine/mine",
+        "text":"我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/smine.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

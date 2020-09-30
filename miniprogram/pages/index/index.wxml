@@ -1,0 +1,23 @@
+<view class="view">
+<button class="newbtn1"  style="width:90%" wx:for="{{5}}" bindtap='gototable1'>
+<view class="text" style="width:60%">
+  <view class="item">
+    <text>项目:infomation</text>
+  </view> 
+  <view class="item">
+    <text>时间:infomation</text>
+  </view> 
+  <view class="item">
+    <text>地点:infomation</text>
+  </view> 
+</view>
+<view class="image" style="width:30%" >
+  <image class="showpic" src="/images/july.png" mode="aspectFill" ></image>
+</view>
+</button>
+
+<button class="newbtn" type="primary" style="width:90%" bindtap='gototable'>
+  <image class="plus" src="/images/+号.png"></image>
+</button>
+
+</view>

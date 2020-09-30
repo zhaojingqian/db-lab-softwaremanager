@@ -1,0 +1,17 @@
+<!--pages/table1/table1.wxml-->
+<view class="vtable1"> 
+<view class="item">项目名
+  <input class="item1" name="inputproject" placeholder="请输入项目名" bindinput="addproname" />
+</view>  
+<view class="item">时间
+  <input class="item1" name="inputtime" placeholder="请输入时间" bindinput="addtime"/>
+</view> 
+<view class="item">地点
+  <input class="item1" name="inputplace" placeholder="请输入地点" bindinput="addplace"/>
+</view> 
+  <view class="item_text">备注
+  <input name="inputdetail" placeholder="还有什么想说的" bindinput="adddetail"/>
+  </view>
+
+  <button class="button" bindtap="gotoPlay">创建项目</button>
+</view>
