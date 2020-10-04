@@ -8,8 +8,9 @@ page{
   flex-direction: column;*/
   
 }
-.newbtn1{
+.new_button{
   height: 240rpx;
+  width: 200rpx;
   margin-top: 30px;
   border-radius: 30rpx;
   background: linear-gradient(#97ccfb, rgb(255, 255, 255)); 
@@ -19,24 +20,27 @@ page{
   justify-content: center;
 }
 
-.newbtn{
-  height: 240rpx;
-  margin-top: 30px;
-  border-radius: 30rpx;
-  background: linear-gradient(#97ccfb, rgb(255, 255, 255)); 
-  box-shadow:0px 2px 4px 2px #DDDDDD;
+.add_button{
+  height: 100rpx;
+  width: 100rpx;
+  background-color: rgba(100, 193, 236, 0.829);
+  border-radius: 100%;
+  position: fixed;
+  bottom: 30rpx;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.newbtn1::after {
-  border:0
-}
+
 
 .plus{
-  margin-left: auto;
-  margin-top: 70rpx;
-  width: 100rpx;
-  height: 100rpx;
-}
+  margin-left:6rpx;
+  margin-top: 6rpx;
+  width: 50rpx;
+  height: 50rpx;
 
+}
 .item{
   color: grey;
   padding-top: 15rpx;

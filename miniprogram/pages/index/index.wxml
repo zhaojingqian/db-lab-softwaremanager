@@ -19,5 +19,3 @@
 <button class="newbtn" type="primary" style="width:90%" bindtap='gototable'>
   <image class="plus" src="/images/+号.png"></image>
 </button>
-
-</view>
