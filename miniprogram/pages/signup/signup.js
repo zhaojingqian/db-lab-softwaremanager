@@ -1,12 +1,22 @@
-// pages/table2/table2.js
+// pages/signup/signup.js
 Page({
 
-  //跳转到非tabBar页面  
-  gotosignup: function (options) {
-    wx.navigateTo({
-          url: '../signup/signup',//要跳转到的页面路径
-  })  
+
+  goback: function (options) {
+
+    wx.showToast({
+      title: '报名成功！！',
+    })
+    setTimeout(function() {
+      //要延时执行的代码
+      wx.switchTab({
+        url: '../game/game',
+      })
+    }, 1000) //延迟时间
+
+    
   },
+
 
   /**
    * 页面的初始数据

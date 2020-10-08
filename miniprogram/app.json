@@ -6,7 +6,10 @@
     "pages/logs/logs",
     "pages/table/table",
     "pages/table1/table1",
-    "pages/table2/table2"
+    "pages/table2/table2",
+    "pages/signup/signup",
+    "pages/quitpro/quitpro",
+    "pages/quitgame/quitgame"
   ],
   "window":{
     "backgroundTextStyle":"dark",

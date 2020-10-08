@@ -1,6 +1,6 @@
-<!--pages/table1/table1.wxml-->
-<view class="vtable1"> 
-<view class="item">项目名：
+<!--pages/quitgame/quitgame.wxml-->
+<view class="vtable2"> 
+<view class="item">赛事：
   <text>infomation</text>
 </view>  
 <view class="item">时间： 
@@ -13,5 +13,5 @@
     <textarea>infomation</textarea>
   </view>
 
-  <button class="button" bindtap="goback">我要加入</button>
+  <button class="button" bindtap="cancel">想要退出</button>
 </view>

@@ -1,11 +1,26 @@
-// pages/table2/table2.js
+// pages/quitpro/quitpro.js
 Page({
 
-  //跳转到非tabBar页面  
-  gotosignup: function (options) {
-    wx.navigateTo({
-          url: '../signup/signup',//要跳转到的页面路径
-  })  
+  cancel:function(option){
+    wx.showModal({
+      cancelColor: 'rgb(168, 205, 230)',
+      content:'确认退出吗？？？',
+      success(res){
+          if(res.confirm){
+            wx.showToast({
+              title: '成功退出啦！',
+              duration: 3000
+            }),
+            setTimeout(function() {
+              //要延时执行的代码
+              wx.switchTab({
+              url: '../mine/mine',
+            })
+            }, 1000) //延迟时间
+            
+          }
+      }
+    })
   },
 
   /**

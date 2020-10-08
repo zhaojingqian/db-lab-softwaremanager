@@ -12,4 +12,6 @@
   <view class="item_text">备注：  
     <textarea>infomation</textarea>
   </view>
+
+  <button class="button" bindtap="gotosignup">我要报名</button>
 </view>

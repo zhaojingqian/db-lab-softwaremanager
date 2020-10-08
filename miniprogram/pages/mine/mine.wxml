@@ -18,7 +18,7 @@
 
   <scroll-view class="scroll1" scroll-y="true" style="height: 600rpx;">
     
-    <button class="newbtn1" type="primary" style="width:90%" wx:for="{{3}}" bindtap='gototable1'>
+    <button class="newbtn1" type="primary" style="width:90%" wx:for="{{3}}" bindtap='gotoquit1'>
      <view class="item">项目 </view> 
      <view class="item">人数 </view> 
      <view class="item">地点 </view> 
@@ -30,8 +30,8 @@
 
   <scroll-view class="scroll2" scroll-y="true" style="height: 400rpx;">
   
-    <button class="newbtn2" type="primary" style="width:90%" wx:for="{{2}}" bindtap='gototable2'>
+    <button class="newbtn2" type="primary" style="width:90%" wx:for="{{2}}" bindtap='gotoquit2'>
       <view class="item">赛事 </view> 
-      <view class="item">地点 </view>
+      <view class="item">时间 </view>
     </button>
   </scroll-view>

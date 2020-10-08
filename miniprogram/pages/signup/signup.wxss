@@ -1,4 +1,3 @@
-/* pages/table1/table1.wxss */
 .vtable1{  
   font-size: larger;
   position: relative;
@@ -20,7 +19,7 @@
 }
 
 .button{
-  background-color: rgb(168, 205, 230);
+  background-color: #54c5c5;
   margin-top: 20rpx;
   height: 75rpx;
 }
@@ -32,12 +31,4 @@
   width: 500rpx;
   margin-top: 40rpx;
 
-}
-
-.ui_uploader_cell{
-  border: 3rpx solid #DDDDDD;
-  border-radius: 10rpx;
-
-  height: 200rpx;
-  width: 200rpx;
 }

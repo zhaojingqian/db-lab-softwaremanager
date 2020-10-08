@@ -1,6 +1,21 @@
 // pages/table1/table1.js
 Page({
 
+  goback: function (options) {
+
+    wx.showToast({
+      title: '成功加入！！',
+    })
+    setTimeout(function() {
+      //要延时执行的代码
+      wx.switchTab({
+        url: '../index/index',
+      })
+    }, 1000) //延迟时间
+
+    
+  },
+
   /**
    * 页面的初始数据
    */

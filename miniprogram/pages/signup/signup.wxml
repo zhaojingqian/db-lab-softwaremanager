@@ -1,0 +1,14 @@
+<!--pages/table1/table1.wxml-->
+<view class="vtable1" > 
+  <view class="item">姓名
+   <input class="item1" name="inputproject" placeholder="请输入姓名" bindinput="addproname" />
+  </view>  
+  <view class="item">学号
+    <input class="item1" name="inputtime" placeholder="请输入学号" bindinput="addtime"/>
+  </view> 
+  <view class="item">学院
+    <input class="item1" name="inputplace" placeholder="请输入学院" bindinput="addplace"/>
+  </view> 
+
+  <button class="button" bindtap="goback">确认报名</button>
+</view>

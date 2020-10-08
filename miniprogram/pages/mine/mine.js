@@ -3,17 +3,17 @@ Page({
 
 
   //跳转到非tabBar页面  
-  gototable1: function (options) {
+  gotoquit1: function (options) {
     wx.navigateTo({
-          url: '../table1/table1',//要跳转到的页面路径
+          url: '../quitpro/quitpro',//要跳转到的页面路径
   })  
   },
 
   
   //跳转到非tabBar页面  
-gototable2: function (options) {
+gotoquit2: function (options) {
   wx.navigateTo({
-        url: '../table2/table2',//要跳转到的页面路径
+        url: '../quitgame/quitgame',//要跳转到的页面路径
 })  
 },
   /**

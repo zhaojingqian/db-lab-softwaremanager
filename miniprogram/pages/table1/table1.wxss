@@ -13,3 +13,7 @@
      padding-bottom: 70rpx;
    }
    
+
+.button{
+  background-color:  rgb(168, 205, 230);
+ }
