@@ -535,7 +535,7 @@ QTabBar::tab{width:120}</string>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>570</x>
+       <x>560</x>
        <y>440</y>
        <width>93</width>
        <height>28</height>
@@ -548,6 +548,24 @@ QTabBar::tab{width:120}</string>
      </property>
      <property name="text">
       <string>绑定信息</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>440</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>修改信息</string>
      </property>
     </widget>
    </widget>

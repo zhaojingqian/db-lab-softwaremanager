@@ -12,6 +12,7 @@ from teacher import Ui_teacher_window
 
 from change_info import Ui_change_info
 from bondteacher import Ui_bondteacher
+from change_teacherinfo import Ui_change_teacherinfo
 
 # user_id = 0
 # admin_id = 0
@@ -159,9 +160,9 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
     def __init__(self):
         super(admin_window, self).__init__()
         self.setupUi(self)
-        self.update_personinfo()
+        self.update_admin_info()
 
-    def update_personinfo(self):
+    def update_admin_info(self):
         #个人信息界面
         # print("已调用update_persooninfo")
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
@@ -171,6 +172,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
             cur.execute(sql)
             result = cur.fetchone()
             # print(result)
+            id[1] = result[0]
             self.lable_admin_name.setText(result[2])
             self.lable_admin_sex.setText(result[3])
             self.lable_admin_type.setText("管理员")
@@ -185,7 +187,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
     
     def change_personinfo(self):
         self.change_info = change_info()
-        self.change_info.my_singal.connect(self.update_personinfo)
+        self.change_info.my_singal.connect(self.update_admin_info)
         self.change_info.show()
         
 #----------------------------------------------------------
@@ -241,29 +243,131 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
             sql = "select * from teacher where user_id='%s' "%(id[0])
             cur.execute(sql)
             result = cur.fetchone()
-            # if result
-            # self.lable_admin_name.setText(result[2])
-            # self.lable_admin_sex.setText(result[3])
-            # self.lable_admin_type.setText("管理员")
-            # self.lable_admin_conn.setText(result[4])
-            # self.lable_admin_name_2.setText(result[2])
-            # self.lable_admin_sex2.setText(result[3])
-
+            if(result):
+                sql = "select * from teacher where user_id='%s'"%(id[0])
+                cur.execute(sql)
+                data = cur.fetchone()
+                self.lable_teacher_name.setText(data[2])
+                self.lable_teacher_sex.setText(data[3])
+                self.lable_teacher_type.setText("教师")
+                self.lable_teacher_name_2.setText(data[2])
+                self.lable_teacher_sex2.setText(data[3])
+                self.lable_teacher_conn.setText(data[4])
+                self.pushButton.hide()
+            else:
+                self.lable_teacher_name.setText("null")
+                self.lable_teacher_sex.setText("null")
+                self.lable_teacher_type.setText("教师")
+                self.lable_teacher_name_2.setText("null")
+                self.lable_teacher_sex2.setText("null")
+                self.lable_teacher_conn.setText("null")
+                self.pushButton_2.hide()
         except:
             print("user_id = '%s'")%(id[0])
         cur.close()
         db.close()
+
+    def change_teacher(self):
+        # self.change_info = change_info()
+        # self.change_info.my_singal.connect(self.update_personinfo)
+        # self.change_info.show()
+        self.bondteacher = bondteacher()
+        self.bondteacher.my_singal.connect(self.update_teacher_info)
+        self.bondteacher.show()
+
+    def change_info(self):
+        self.change_teacherinfo = change_teacherinfo()
+        self.change_teacherinfo.my_singal.connect(self.update_teacher_info)
+        self.change_teacherinfo.show()
 #----------------------------------------------------------
 
 
 #----------------------------------------------------------
 #教师个人信息绑定小窗
 class bondteacher(QtWidgets.QWidget, Ui_bondteacher):
+
     def __init__(self):
         super(bondteacher, self).__init__()
         self.setupUi(self)
+        self.display_teacher()
+
+    my_singal = QtCore.pyqtSignal(str)
+    def closeEvent(self, event):
+        self.my_singal.emit('1')
+
+    def display_teacher(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select teacher_name from teacher where user_id is null"
+            cur.execute(sql)
+            datas = cur.fetchall()
+            # print(datas)
+            for data in datas:
+                # print(data)
+                self.comboBox.addItem(data[0])
+            # print(datas[0][0])
+        except:
+            print("查询教师姓名失败")
+
+        cur.close()
+        db.close()
+
+    def bond_teacher(self):
+        name = self.comboBox.currentText()
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select * from teacher where teacher_name = '%s'"%(name)
+            cur.execute(sql)
+            data = cur.fetchone()
+            id[2] = data[0]
+        except:
+            print("查询教师姓名失败")
+        #绑定
+        try:
+            sql = "update teacher set user_id = '%s' where teacher_id = '%s'"%(id[0], id[2])
+            cur.execute(sql)
+            db.commit()
+            QMessageBox.information(self, "提示", "绑定成功！",QMessageBox.Yes)
+            self.close()
+        except:
+            print("绑定教师信息失败")
+        cur.close()
+        db.close()
 #----------------------------------------------------------
 
+#----------------------------------------------------------
+#教师个人信息修改小窗
+class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
+    def __init__(self):
+        super(change_teacherinfo, self).__init__()
+        self.setupUi(self)
+
+    my_singal = QtCore.pyqtSignal(str)
+    # def sendEditContent(self):
+    #     content = '1'
+    #     self.my_singal.emit(content)
+    def closeEvent(self, event):
+        self.my_singal.emit('1')
+    
+    def buttonclicked_teacher(self):
+        name = self.lineEdit.text()
+        sex = self.comboBox.currentText()
+        conn = self.lineEdit_3.text()
+        # print(name+sex+conn)
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "update teacher set teacher_name='%s', teacher_sex='%s', teacher_connect='%s' where user_id='%s'"%(name, sex, conn, id[0])
+            cur.execute(sql)
+            db.commit()
+            QMessageBox.information(self,"提示","修改成功！",QMessageBox.Yes)
+
+            self.close()
+        except:
+            print("更新个人信息失败")
+#----------------------------------------------------------
 
 
 
@@ -271,4 +375,6 @@ if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
     main_window = main_window()
     main_window.show()
+    # main_window = teacher_window()
+    # main_window.show()
     sys.exit(app.exec_())

@@ -37,6 +37,8 @@ class Ui_bondteacher(object):
         self.pushButton_2.setObjectName("pushButton_2")
 
         self.retranslateUi(bondteacher)
+        self.pushButton.clicked.connect(bondteacher.bond_teacher)
+        self.pushButton_2.clicked.connect(bondteacher.close)
         QtCore.QMetaObject.connectSlotsByName(bondteacher)
 
     def retranslateUi(self, bondteacher):

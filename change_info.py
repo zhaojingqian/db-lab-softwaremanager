@@ -54,7 +54,7 @@ class Ui_change_info(object):
         self.comboBox.addItem("")
 
         self.retranslateUi(change_info)
-        self.pushButton.clicked.connect(change_info.buttonclicked)
+        self.pushButton.clicked.connect(change_info.buttonclicked_teacher)
         self.pushButton_2.clicked.connect(change_info.close)
         QtCore.QMetaObject.connectSlotsByName(change_info)
 
