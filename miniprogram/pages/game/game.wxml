@@ -1,6 +1,0 @@
-<view class="view">
-<button class="newbtn" type="primary" style="width:90%" wx:for="{{4}}" bindtap='gototable2'>
-  <view class="item">赛事:infomation </view> 
-  <view class="item">时间:infomation </view> 
-</button>
-</view>
