@@ -367,6 +367,7 @@ class Ui_admin_window(object):
 
         self.retranslateUi(admin_window)
         self.admin_tabWidget.setCurrentIndex(3)
+        self.button_person_changeinfo.clicked.connect(admin_window.change_personinfo)
         self.spushButton.clicked.connect(admin_window.softwareinfo_button_clicked)
         self.spushButton_2.clicked.connect(admin_window.softwarechange_button_clicked)
         self.spushButton_3.clicked.connect(admin_window.softwaredelete_button_clicked)
