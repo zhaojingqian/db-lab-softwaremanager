@@ -19,6 +19,7 @@ from softchange_window import Ui_softwarechange
 from softadd_window import Ui_softwareadd
 from labchange_window import Ui_lab_change_window
 from labadd_window import Ui_lab_add_window
+from labinfo_window import Ui_lab_info_window
 # user_id = 0
 # admin_id = 0
 # teacher_id = 0
@@ -367,8 +368,14 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         cur.close()
         db.close() 
 
-    def labinfo_button_cliced(self):
-        pass
+    def labinfo_button_clicked(self):
+        if self.admin_page_4.selectedItems():
+            row = self.admin_page_4.selectedItems()[0].row()
+            select_id[1] = self.admin_page_4.item(row, 0).text()
+            self.labinfo = labinfo()
+            self.labinfo.show()
+        else:
+            QMessageBox.information(self,"提示","请先选择实验室！",QMessageBox.Yes)
 
     def labchange_button_clicked(self):
         if self.admin_page_4.selectedItems():
@@ -516,6 +523,41 @@ class labadd(QtWidgets.QWidget, Ui_lab_add_window):
         db.close() 
 
 #----------------------------------------------------------
+
+#----------------------------------------------------------
+#实验室详情小窗
+class labinfo(QtWidgets.QWidget, Ui_lab_info_window):
+    def __init__(self):
+        super(labinfo, self).__init__()
+        self.setupUi(self)
+        self.updatelabinfo()
+
+    def updatelabinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, equipment.equipment_id, administrator.admin_id, lab.lab_scale\
+                    from equipment, administrator, lab  \
+                    where lab.equipment_id=equipment.equipment_id and lab.admin_id = administrator.admin_id and lab.lab_id='%s'\
+                    "%(select_id[1])
+            cur.execute(sql)
+            data = cur.fetchone()
+
+            self.label_6.setText(data[1])
+            self.label_7.setText(data[2])
+            # self.label_8.setText(data[3])
+            self.label_9.setText(data[5])
+            sql = "select software,equipment_config from lab_software where lab_id='%s'"%(select_id[1])
+            cur.execute(sql)
+            info = cur.fetchone()
+            self.textBrowser.setText(info[0]) 
+            self.label_8.setText(info[1]) 
+        except:
+            print("显示实验室详情失败！") 
+        cur.close()
+        db.close() 
+
+#----------------------------------------------------------
 #----------------------------------------------------------
 #实验室修改小窗
 class labchange(QtWidgets.QWidget, Ui_lab_change_window):
@@ -644,7 +686,6 @@ class labchange(QtWidgets.QWidget, Ui_lab_change_window):
             self.close()
         except:
             print("修改失败！")
-
 #----------------------------------------------------------
 
 #----------------------------------------------------------

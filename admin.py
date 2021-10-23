@@ -371,7 +371,7 @@ class Ui_admin_window(object):
         self.spushButton_2.clicked.connect(admin_window.softwarechange_button_clicked)
         self.spushButton_3.clicked.connect(admin_window.softwaredelete_button_clicked)
         self.spushButton_4.clicked.connect(admin_window.softwareadd_button_clicked)
-        self.lpushButton.hide()
+        self.lpushButton.clicked.connect(admin_window.labinfo_button_clicked)
         self.lpushButton_2.clicked.connect(admin_window.labchange_button_clicked)
         self.lpushButton_3.clicked.connect(admin_window.labdelete_button_clicked)
         self.lpushButton_4.clicked.connect(admin_window.labadd_button_clicked)
