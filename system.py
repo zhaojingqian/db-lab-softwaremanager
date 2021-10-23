@@ -80,7 +80,6 @@ class main_window(QtWidgets.QWidget, Ui_main_window):
 #----------------------------------------------------------
 
 
-
 #----------------------------------------------------------
 #注册界面
 class logon_window(QtWidgets.QWidget, Ui_logon_window):
@@ -137,6 +136,7 @@ class logon_window(QtWidgets.QWidget, Ui_logon_window):
                             QMessageBox.information(self,"提示","注册成功！",QMessageBox.Yes)
                         else:
                             QMessageBox.information(self,"提示","口令错误！",QMessageBox.Yes)
+                            return
                     else:
                         user_type = "教师"
                     
@@ -161,7 +161,6 @@ class logon_window(QtWidgets.QWidget, Ui_logon_window):
         self.close()
         main_window.show()
 #----------------------------------------------------------
-
 
 
 #----------------------------------------------------------
@@ -392,7 +391,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         if self.admin_page_4.selectedItems():
             row = self.admin_page_4.selectedItems()[0].row()
             select_id[1] = self.admin_page_4.item(row, 0).text()
-            A = QMessageBox.information(self,"提示","确认删除该软件吗？",QMessageBox.Yes| QMessageBox.No)
+            A = QMessageBox.information(self,"提示","确认删除该实验室数据吗？",QMessageBox.Yes| QMessageBox.No)
             if A == QMessageBox.Yes:
                 db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
                 cur = db.cursor() 
@@ -419,8 +418,6 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         self.labadd = labadd()
         self.labadd.my_singal.connect(self.updateall)
         self.labadd.show()
-
-
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -545,7 +542,6 @@ class labinfo(QtWidgets.QWidget, Ui_lab_info_window):
 
             self.label_6.setText(data[1])
             self.label_7.setText(data[2])
-            # self.label_8.setText(data[3])
             self.label_9.setText(data[5])
             sql = "select software,equipment_config from lab_software where lab_id='%s'"%(select_id[1])
             cur.execute(sql)
@@ -660,7 +656,7 @@ class labchange(QtWidgets.QWidget, Ui_lab_change_window):
                     cur.execute(sql)
                     count = cur.fetchone()
                     if count[0]:
-                        QMessageBox.information(self,"提示","修改失败！有绑定的课程需要的软件不可删除！",QMessageBox.Yes)
+                        QMessageBox.information(self,"提示","修改失败！有绑定的课程的实验室数据不可删除！",QMessageBox.Yes)
                         self.close()
                         return
             #先删除软件
@@ -863,8 +859,6 @@ class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
 
 #----------------------------------------------------------
 
-
-
 #----------------------------------------------------------
 #教师界面
 class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
@@ -1028,7 +1022,6 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
         db.close()  
 #----------------------------------------------------------
 
-
 #----------------------------------------------------------
 #教师个人信息绑定小窗
 class bondteacher(QtWidgets.QWidget, Ui_bondteacher):
@@ -1115,14 +1108,12 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
             print("更新个人信息失败")
 #----------------------------------------------------------
 
-
-
 if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
-    # main_window = main_window()
-    # main_window.show()
+    main_window = main_window()
+    main_window.show()
     # main_window = teacher_window()
     # main_window.show()
-    main_window = admin_window()
-    main_window.show()
+    # main_window = admin_window()
+    # main_window.show()
     sys.exit(app.exec_())

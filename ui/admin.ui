@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>6</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -325,8 +325,8 @@ QTabBar::tab{width:120}</string>
       <rect>
        <x>710</x>
        <y>30</y>
-       <width>95</width>
-       <height>178</height>
+       <width>114</width>
+       <height>202</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -393,8 +393,8 @@ QTabBar::tab{width:120}</string>
       <rect>
        <x>710</x>
        <y>30</y>
-       <width>95</width>
-       <height>178</height>
+       <width>114</width>
+       <height>202</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
