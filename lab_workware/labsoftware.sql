@@ -29,8 +29,8 @@ create table course
    course_id            int not null,
    course_name          char(20) not null,
    department           char(20) not null,
-   course_period        int not null,
-   course_amount        int,
+   course_period        char(20) not null,
+   course_amount        char(20),
    primary key (course_id)
 );
 
@@ -43,7 +43,7 @@ create table equipment
    equipment_type       char(20),
    equipment_config     text not null,
    equipment_os         char(20),
-   equipment_scale      int not null,
+   equipment_scale      char(20) not null,
    primary key (equipment_id)
 );
 
@@ -56,7 +56,7 @@ create table lab
    equipment_id         int,
    admin_id             int not null,
    lab_address          char(20) not null,
-   lab_scale            int not null,
+   lab_scale            char(20) not null,
    primary key (lab_id)
 );
 
@@ -80,7 +80,7 @@ create table software
    software_version     char(20),
    software_type        char(20),
    software_arch        char(20),
-   software_memory      int,
+   software_memory      char(20),
    software_info        text,
    primary key (software_id)
 );
@@ -219,7 +219,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `labsoftware`.`course_software` AS
+VIEW `course_software` AS
     SELECT 
         `t`.`course_id` AS `course_id`,
         `t`.`course_name` AS `course_name`,
@@ -233,31 +233,28 @@ VIEW `labsoftware`.`course_software` AS
             SEPARATOR ',') AS software
     FROM
         (SELECT 
-            labsoftware.course.course_id AS course_id,
-                labsoftware.course.course_name AS course_name,
-                labsoftware.teacher.teacher_name AS teacher_name,
-                labsoftware.course.course_period AS course_period,
-                labsoftware.course.course_amount AS course_amount,
-                labsoftware.lab.lab_address AS lab_address,
-                labsoftware.software.software_name AS software_name
+            course.course_id AS course_id,
+                course.course_name AS course_name,
+                teacher.teacher_name AS teacher_name,
+                course.course_period AS course_period,
+                course.course_amount AS course_amount,
+                lab.lab_address AS lab_address,
+                software.software_name AS software_name
         FROM
-            ((((((labsoftware.course
-        JOIN labsoftware.teacher)
-        JOIN labsoftware.teach_course)
-        JOIN labsoftware.lab)
-        JOIN labsoftware.software_need)
-        JOIN labsoftware.lab_course)
-        JOIN labsoftware.software)
-        WHERE
-            ((labsoftware.course.course_id = labsoftware.teach_course.course_id)
-                AND (labsoftware.teacher.teacher_id = labsoftware.teach_course.teacher_id)
-                AND (labsoftware.lab_course.lab_id = labsoftware.lab.lab_id)
-                AND (labsoftware.lab_course.course_id = labsoftware.course.course_id)
-                AND (labsoftware.software_need.software_id = labsoftware.software.software_id)
-                AND (labsoftware.software_need.course_id = labsoftware.course.course_id))) t
+            ((((((course
+        LEFT JOIN teach_course ON ((course.course_id = teach_course.course_id)))
+        LEFT JOIN teacher ON ((teacher.teacher_id = teach_course.teacher_id)))
+        LEFT JOIN lab_course ON ((lab_course.course_id = course.course_id)))
+        LEFT JOIN lab ON ((lab_course.lab_id = lab.lab_id)))
+        LEFT JOIN software_need ON ((software_need.course_id = course.course_id)))
+        LEFT JOIN software ON ((software_need.software_id = software.software_id)))) t
     GROUP BY `t`.course_id;
     
-    CREATE VIEW `lab_software` AS
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `lab_software` AS
     SELECT 
         t.lab_id,
         lab_address,
@@ -269,18 +266,17 @@ VIEW `labsoftware`.`course_software` AS
         (SELECT 
             lab.lab_id, lab_address, equipment_config, software_name
         FROM
-            software, software_have, lab, equipment
-        WHERE
-            lab.lab_id = software_have.lab_id
-                AND software.software_id = software_have.software_id
-                AND lab.equipment_id = equipment.equipment_id) AS t
+            lab
+        LEFT JOIN software_have ON (lab.lab_id = software_have.lab_id)
+        LEFT JOIN software ON (software_have.software_id = software.software_id)
+        LEFT JOIN equipment ON (lab.equipment_id = equipment.equipment_id)) AS t
     GROUP BY lab_address;
     
-CREATE
+CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `labsoftware`.`teacher_course` AS
+VIEW `teacher_course` AS
     SELECT 
         `t`.`teacher_id` AS `teacher_id`,
         `t`.`teacher_name` AS `teacher_name`,
@@ -295,16 +291,11 @@ VIEW `labsoftware`.`teacher_course` AS
                 `c`.`course_name` AS `course_name`,
                 `l`.`lab_address` AS `lab_address`
         FROM
-            ((((`labsoftware`.`teacher` `t`
-        JOIN `labsoftware`.`course` `c`)
-        JOIN `labsoftware`.`lab` `l`)
-        JOIN `labsoftware`.`teach_course` `tc`)
-        JOIN `labsoftware`.`lab_course` `lc`)
-        WHERE
-            ((`t`.`teacher_id` = `tc`.`teacher_id`)
-                AND (`tc`.`course_id` = `c`.`course_id`)
-                AND (`l`.`lab_id` = `lc`.`lab_id`)
-                AND (`lc`.`course_id` = `c`.`course_id`))) `t`
+            ((((`teacher` `t`
+        LEFT JOIN `teach_course` `tc` ON (`t`.`teacher_id` = `tc`.`teacher_id`))
+        LEFT JOIN `course` `c` ON (`tc`.`course_id` = `c`.`course_id`))
+        LEFT JOIN `lab_course` `lc` ON (`lc`.`course_id` = `c`.`course_id`))
+        LEFT JOIN `lab` `l` ON (`l`.`lab_id` = `lc`.`lab_id`))) `t`
     GROUP BY `t`.`teacher_id`;
     
 CREATE 

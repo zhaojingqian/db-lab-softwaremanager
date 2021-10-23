@@ -16,15 +16,17 @@ from bondteacher import Ui_bondteacher
 from change_teacherinfo import Ui_change_teacherinfo
 from software_window import Ui_softwareinfo
 from softchange_window import Ui_softwarechange
-
+from softadd_window import Ui_softwareadd
+from labchange_window import Ui_lab_change_window
+from labadd_window import Ui_lab_add_window
 # user_id = 0
 # admin_id = 0
 # teacher_id = 0
 # 0是user， 1是admin， 2是teacher
 id = [1, 0, 0]
 
-# 0是software
-select_id = [0]
+# 0是software，1是lab
+select_id = [0, 0]
 
 #----------------------------------------------------------
 #初始界面
@@ -173,7 +175,8 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         self.update_admin_info()
         self.updatecourse_view()
         self.updatelab_view()
-        self.updatesoftware()       
+        self.updatesoftware() 
+        self.updatelab()      
 
     def update_admin_info(self):
         #个人信息界面
@@ -222,6 +225,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
                     self.admin_page.setItem(row, i, item)
                 row = row + 1
+                # print(data)
 
         except:
             print("显示课程界面失败")
@@ -249,7 +253,9 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
                     self.admin_page_2.setItem(row, i, item)
+                    # print(data[i])
                 row = row + 1
+                # print(data)
 
         except:
             print("显示实验室界面失败")
@@ -265,17 +271,17 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
             sql = "select software_id, software_name, software_type from software"
             cur.execute(sql)
             datas = cur.fetchall()
-            print(datas[0])
+            # print(datas[0])
+            # print(datas)
             row = 0
             for data in datas:
-
                 self.admin_page_3.setRowCount(row+1)
                 for i in range(len(data)):   
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
                     self.admin_page_3.setItem(row, i, item)
                 row = row + 1
-            print("yigengxin")
+            # print("yigengxin")
         except:
             print("显示实验室界面失败")
         cur.close()
@@ -300,7 +306,389 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
             self.softchange.show()
         else:
             QMessageBox.information(self,"提示","请先选择软件！",QMessageBox.Yes)
+    
+    def softwaredelete_button_clicked(self):
+        if self.admin_page_3.selectedItems():
+            row = self.admin_page_3.selectedItems()[0].row()
+            select_id[0] = self.admin_page_3.item(row, 0).text()
+            A = QMessageBox.information(self,"提示","确认删除该软件吗？",QMessageBox.Yes| QMessageBox.No)
+            if A == QMessageBox.Yes:
+                db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+                cur = db.cursor()    
+                try:
+                    sql = "delete from software where software_id='%s'"%(select_id[0])
+                    cur.execute(sql)
+                    db.commit()
+                    QMessageBox.information(self,"提示","删除成功！",QMessageBox.Yes)         
+                    self.updateall() 
+                except:
+                    QMessageBox.information(self,"提示","有课程需要或实验室拥有该软件，不可删除！",QMessageBox.Yes)
+                cur.close()
+                db.close() 
+            else:
+                pass
+
+        else:
+            QMessageBox.information(self,"提示","请先选择软件！",QMessageBox.Yes)    
+
+    def softwareadd_button_clicked(self):
+        self.softwareadd = softadd()
+        self.softwareadd.my_singal.connect(self.updateall)
+        self.softwareadd.show()
+      
         
+    def updatelab(self):
+        self.admin_page_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.admin_page_4.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()    
+        try:
+            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, lab_software.equipment_config, lab_software.software from lab_software, administrator, lab where\
+                    lab_software.lab_id=lab.lab_id and lab.admin_id = administrator.admin_id\
+                    order by lab.lab_id"
+            cur.execute(sql)
+            datas = cur.fetchall()
+            row = 0
+
+            for data in datas:
+                # prerow = self.admin_page_2.rowCount()
+
+                self.admin_page_4.setRowCount(row+1)
+                for i in range(len(data)):             
+                    item = QTableWidgetItem(str(data[i]))
+                    item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                    self.admin_page_4.setItem(row, i, item)
+                    # print(data[i])
+                row = row + 1
+                # print(data)
+
+        except:
+            print("显示实验室界面失败")
+        cur.close()
+        db.close() 
+
+    def labinfo_button_cliced(self):
+        pass
+
+    def labchange_button_clicked(self):
+        if self.admin_page_4.selectedItems():
+            row = self.admin_page_4.selectedItems()[0].row()
+            select_id[1] = self.admin_page_4.item(row, 0).text()
+            # print(select_id[1])
+            self.labchange = labchange()
+            self.labchange.my_singal.connect(self.updateall)
+            self.labchange.show()
+        else:
+            QMessageBox.information(self,"提示","请先选择实验室！",QMessageBox.Yes)
+    
+    def labdelete_button_clicked(self):
+        if self.admin_page_4.selectedItems():
+            row = self.admin_page_4.selectedItems()[0].row()
+            select_id[1] = self.admin_page_4.item(row, 0).text()
+            A = QMessageBox.information(self,"提示","确认删除该软件吗？",QMessageBox.Yes| QMessageBox.No)
+            if A == QMessageBox.Yes:
+                db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+                cur = db.cursor() 
+                try:
+                    sql = "select count(*) from lab_course where lab_id='%s'"%(select_id[1])
+                    cur.execute(sql)
+                    count = cur.fetchone()
+                    if count[0]:
+                        QMessageBox.information(self,"提示","实验室有绑定课程，不可删除！",QMessageBox.Yes)
+                    else:
+                        sql = "delete from lab where lab_id='%s'"%(select_id[1])
+                        cur.execute(sql)
+                        db.commit()
+                        QMessageBox.information(self,"提示","删除成功！",QMessageBox.Yes)
+                        self.updateall()
+                except:
+                    print("删除失败！")
+            else:
+                pass
+        else:
+            QMessageBox.information(self,"提示","请先选择实验室！",QMessageBox.Yes)
+
+    def labadd_button_clicked(self):
+        self.labadd = labadd()
+        self.labadd.my_singal.connect(self.updateall)
+        self.labadd.show()
+
+
+#----------------------------------------------------------
+
+#----------------------------------------------------------
+#实验室添加小窗
+class labadd(QtWidgets.QWidget, Ui_lab_add_window):
+    def __init__(self):
+        super(labadd, self).__init__()
+        self.setupUi(self)  
+        self.displayinfo()
+
+    my_singal = QtCore.pyqtSignal(str)
+    def closeEvent(self, event):
+        self.my_singal.emit('1')
+
+    def displayinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+
+            sql = "select equipment_type from equipment order by equipment_id"
+            cur.execute(sql)
+            equipdatas = cur.fetchall()
+            for equipdata in equipdatas:
+                self.comboBox_3.addItem(equipdata[0])
+
+            sql = "select admin_name from administrator order by admin_id"
+            cur.execute(sql)
+            admindatas = cur.fetchall()
+            for admindata in admindatas:
+                self.comboBox_2.addItem(admindata[0])
+
+            sql = "select software_id, software_name from software order by software_id"
+            cur.execute(sql)
+            allsoftdatas = cur.fetchall()
+
+            for i in range(len(allsoftdatas)):
+                check = QtWidgets.QCheckBox(allsoftdatas[i][1])
+                check.setObjectName(str(allsoftdatas[i][0]))
+                self.verticalLayout_3.addWidget(check)            
+        except:
+            print("显示实验室详情失败！") 
+        cur.close()
+        db.close() 
+
+    def labcommit_button_clicked(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor() 
+
+        address = self.lineEdit.text()
+        admin_name = self.comboBox_2.currentText()
+        equip_name = self.comboBox_3.currentText()
+        scale = self.lineEdit_4.text()
+        #获得id
+        sql = "select lab_id from lab order by lab_id"
+        cur.execute(sql)
+        results = cur.fetchall()
+        last_id = results[-1][0]
+        print(last_id)
+
+        #获得管理员id
+        sql = "select admin_id from administrator where admin_name='%s'"%(admin_name)
+        cur.execute(sql)
+        admindata = cur.fetchone()
+        adminid = admindata[0]
+
+        #获得设备id
+        sql = "select equipment_id from equipment where equipment_type='%s'"%(equip_name)
+        cur.execute(sql)
+        equipdata = cur.fetchone()
+        equipid = equipdata[0]
+
+        #新增实验室
+        try:
+            sql = "insert into lab values('%s', '%s', '%s', '%s', '%s')"\
+                    %(last_id+1, equipid, adminid, address, scale)
+            cur.execute(sql)
+            db.commit()
+        except:
+            print("添加实验室失败！")
+        
+        #新增软件
+        try:
+            for i in range(self.verticalLayout_3.count()):
+                item = self.verticalLayout_3.itemAt(i).widget()
+                if item.isChecked():
+                    softid = item.objectName()
+                    # print(item.text())              
+                    sql = "insert into software_have values(%s,%s)"%(softid, last_id+1)
+                    # print(sql)
+                    cur.execute(sql)
+                else:
+                    pass
+
+            db.commit()
+            QMessageBox.information(self,"提示","添加成功！",QMessageBox.Yes)
+            self.close()
+        except:
+            print("添加失败！")
+        cur.close()
+        db.close() 
+
+#----------------------------------------------------------
+#----------------------------------------------------------
+#实验室修改小窗
+class labchange(QtWidgets.QWidget, Ui_lab_change_window):
+    def __init__(self):
+        super(labchange, self).__init__()
+        self.setupUi(self)
+        self.displayinfo()
+
+    my_singal = QtCore.pyqtSignal(str)
+    def closeEvent(self, event):
+        self.my_singal.emit('1')
+
+    def displayinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            # sql = "select lab.lab_id, lab.lab_address, administrator.admin_name from lab where lab_id='%s'"%(select_id[1])
+            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, equipment.equipment_id, administrator.admin_id, lab.lab_scale\
+                    from equipment, administrator, lab  \
+                    where lab.equipment_id=equipment.equipment_id and lab.admin_id = administrator.admin_id and lab.lab_id='%s'\
+                    "%(select_id[1])
+            cur.execute(sql)
+            data = cur.fetchone()
+            # print(data)
+            # lab_id = data[0]
+            self.lineEdit.setText(data[1])
+            sql = "select equipment_type from equipment order by equipment_id"
+            cur.execute(sql)
+            equipdatas = cur.fetchall()
+            for equipdata in equipdatas:
+                self.comboBox_3.addItem(equipdata[0])
+            self.comboBox_3.setCurrentIndex(data[3]-1)
+
+            sql = "select admin_name from administrator order by admin_id"
+            cur.execute(sql)
+            admindatas = cur.fetchall()
+            for admindata in admindatas:
+                self.comboBox_2.addItem(admindata[0])
+            self.comboBox_2.setCurrentIndex(data[4]-1)
+            self.lineEdit_4.setText(data[5])
+            sql = "select software_id, software_name from software order by software_id"
+            cur.execute(sql)
+            allsoftdatas = cur.fetchall()
+
+            for i in range(len(allsoftdatas)):
+                check = QtWidgets.QCheckBox(allsoftdatas[i][1])
+                check.setObjectName(str(allsoftdatas[i][0]))
+                sql = "select count(*) from software_have where lab_id='%s' and software_id='%s'"\
+                    %(select_id[1], allsoftdatas[i][0])
+                cur.execute(sql)
+                count = cur.fetchone()
+                if count[0]:
+                    check.setChecked(True) 
+
+                self.verticalLayout_3.addWidget(check)            
+        except:
+            print("显示实验室详情失败！") 
+        cur.close()
+        db.close() 
+
+    def labcommit_button_clicked(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor() 
+        address = self.lineEdit.text()
+        admin_name = self.comboBox_2.currentText()
+        equip_name = self.comboBox_3.currentText()
+        scale = self.lineEdit_4.text()
+        sql = "update lab set lab_address='%s', lab_scale='%s' where lab_id='%s'"%(address, scale, select_id[1])
+        cur.execute(sql)
+
+        #更新管理员
+        sql = "select admin_id from administrator where admin_name='%s'"%(admin_name)
+        cur.execute(sql)
+        admindata = cur.fetchone()
+        # print(admindata[0])
+        sql = "update lab set admin_id='%s' where lab_id='%s'"%(admindata[0], select_id[1])
+        cur.execute(sql)
+
+        #更新设备
+        sql = "select equipment_id from equipment where equipment_type='%s'"%(equip_name)
+        cur.execute(sql)
+        equipdata = cur.fetchone()
+        sql = "update lab set equipment_id = '%s' where lab_id='%s'"%(equipdata[0], select_id[1])
+        cur.execute(sql)
+
+        #更新软件
+        try:
+            for i in range(self.verticalLayout_3.count()):
+                item = self.verticalLayout_3.itemAt(i).widget()
+                if item.isChecked():
+                    pass
+                else:
+                    softid = item.objectName()
+                    sql = "select count(*)\
+		                    from lab, lab_course, software_need\
+                            where lab.lab_id=lab_course.lab_id and\
+                            lab_course.course_id=software_need.course_id and lab.lab_id='%s'\
+                            and software_need.software_id='%s' "\
+                            %(select_id[1],softid)
+                    cur.execute(sql)
+                    count = cur.fetchone()
+                    if count[0]:
+                        QMessageBox.information(self,"提示","修改失败！有绑定的课程需要的软件不可删除！",QMessageBox.Yes)
+                        self.close()
+                        return
+            #先删除软件
+            sql = "delete from software_have where lab_id='%s'"%(select_id[1])
+            cur.execute(sql)
+            #再新增软件
+            # sql = "select software_id, software_name from software order by software_id"
+            # cur.execute(sql)
+            # allsoftdatas = cur.fetchall()
+            for i in range(self.verticalLayout_3.count()):
+                # print(i)
+                item = self.verticalLayout_3.itemAt(i).widget()
+                if item.isChecked():
+                    softid = item.objectName()
+                    sql = "insert into software_have values(%s,%s)"%(softid, select_id[1])
+                    cur.execute(sql)
+                    # print(softid)
+                else:
+                    pass
+
+            db.commit()
+            QMessageBox.information(self,"提示","修改成功！",QMessageBox.Yes)
+            self.close()
+        except:
+            print("修改失败！")
+
+#----------------------------------------------------------
+
+#----------------------------------------------------------
+#软件添加小窗
+class softadd(QtWidgets.QWidget, Ui_softwareadd):
+    def __init__(self):
+        super(softadd, self).__init__()
+        self.setupUi(self)
+
+    
+    my_singal = QtCore.pyqtSignal(str)
+    def closeEvent(self, event):
+        self.my_singal.emit('1')
+
+    def softcommit_button_clicked(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+
+        name = self.lineEdit.text()
+        version = self.lineEdit_2.text()
+        type = self.lineEdit_3.text()
+        arch = self.lineEdit_4.text()
+        memory = self.lineEdit_5.text()
+        info = self.textEdit.toPlainText()
+        sql = "select software_id from software order by software_id"
+        cur.execute(sql)
+        results = cur.fetchall()
+        last_id = results[-1][0]
+        # print(results)
+        # print(last_id)
+        try:   
+            sql = "insert into software values\
+                    ('%s', '%s', '%s', '%s', '%s', '%s', '%s')"\
+                    %(last_id+1,name,version,type,arch,memory,info)
+            cur.execute(sql)
+            db.commit()
+            QMessageBox.information(self,"提示","添加成功！",QMessageBox.Yes)
+            self.close()
+        except:
+            print("添加失败！")
+
+        cur.close()
+        db.close()  
+
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -312,9 +700,6 @@ class softchange(QtWidgets.QWidget, Ui_softwarechange):
         self.displayinfo()
 
     my_singal = QtCore.pyqtSignal(str)
-    # def sendEditContent(self):
-    #     content = '1'
-    #     self.my_singal.emit(content)
     def closeEvent(self, event):
         self.my_singal.emit('1')
 
@@ -350,16 +735,10 @@ class softchange(QtWidgets.QWidget, Ui_softwarechange):
         info = self.textEdit.toPlainText()
         # print(info)
         try:   
-            if memory:
-                sql = "update software set software_name='%s', software_version='%s', software_type='%s',\
+            sql = "update software set software_name='%s', software_version='%s', software_type='%s',\
                     software_arch='%s', software_memory='%s', software_info='%s'\
                     where software_id='%s'"\
                     %(name,version,type,arch,memory,info,select_id[0])
-            else:
-                sql = "update software set software_name='%s', software_version='%s', software_type='%s',\
-                    software_arch='%s', software_memory=null, software_info='%s'\
-                    where software_id='%s'"\
-                    %(name,version,type,arch,info,select_id[0])
             cur.execute(sql)
             db.commit()
             QMessageBox.information(self,"提示","修改成功！",QMessageBox.Yes)
@@ -440,10 +819,6 @@ class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
             print("显示软件详情失败！")
         cur.close()
         db.close()        
-
-    
-
-
 
 #----------------------------------------------------------
 

@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -62,7 +62,7 @@ QTabBar::tab{width:120}</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -72,7 +72,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-background-color: rgb(240, 240, 240);</string>
+</string>
      </property>
      <property name="dragEnabled">
       <bool>false</bool>
@@ -159,7 +159,7 @@ background-color: rgb(240, 240, 240);</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -169,7 +169,7 @@ background-color: rgb(240, 240, 240);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-background-color: rgb(240, 240, 240);</string>
+</string>
      </property>
      <property name="dragEnabled">
       <bool>false</bool>
@@ -256,7 +256,7 @@ background-color: rgb(240, 240, 240);</string>
        <x>0</x>
        <y>0</y>
        <width>671</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -266,7 +266,7 @@ background-color: rgb(240, 240, 240);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-background-color: rgba(240, 240, 240, 240);</string>
+</string>
      </property>
      <property name="dragEnabled">
       <bool>false</bool>
@@ -320,7 +320,7 @@ background-color: rgba(240, 240, 240, 240);</string>
       </property>
      </column>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>710</x>
@@ -388,75 +388,6 @@ background-color: rgba(240, 240, 240, 240);</string>
     <attribute name="title">
      <string>实验室管理</string>
     </attribute>
-    <widget class="QTableWidget" name="admin_page_4">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>671</width>
-       <height>550</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;</string>
-     </property>
-     <property name="dragEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="rowCount">
-      <number>0</number>
-     </property>
-     <column>
-      <property name="text">
-       <string>软件编号</string>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-        <weight>75</weight>
-        <italic>true</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="background">
-       <color>
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>软件名称</string>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <italic>true</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>软件类型</string>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-        <weight>75</weight>
-        <italic>true</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-     </column>
-    </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
@@ -519,6 +450,98 @@ background-color: rgba(240, 240, 240, 240);</string>
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QTableWidget" name="admin_page_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>实验室编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室地点</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室管理员</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>设备配置</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>配套软件</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="admin_tab5">

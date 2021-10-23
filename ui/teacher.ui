@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -62,7 +62,7 @@ QTabBar::tab{width:120}</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -149,7 +149,7 @@ QTabBar::tab{width:120}</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -255,7 +255,7 @@ QTabBar::tab{width:120}</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
@@ -351,7 +351,7 @@ QTabBar::tab{width:120}</string>
        <x>0</x>
        <y>0</y>
        <width>850</width>
-       <height>550</height>
+       <height>500</height>
       </rect>
      </property>
      <property name="font">
