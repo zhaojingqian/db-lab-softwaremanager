@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>lab_change_window</class>
- <widget class="QWidget" name="lab_change_window">
+ <class>courseadd_window</class>
+ <widget class="QWidget" name="courseadd_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,26 +16,29 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>实验室详情</string>
+   <string>课程详情</string>
   </property>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>60</y>
+     <x>150</x>
+     <y>50</y>
      <width>200</width>
-     <height>47</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(240, 240, 240);
 border:none;</string>
    </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_4">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>250</y>
      <width>200</width>
      <height>47</height>
@@ -49,10 +52,10 @@ border:none;</string>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>320</y>
      <width>231</width>
-     <height>201</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="font">
@@ -72,7 +75,7 @@ border:none;</string>
       <x>0</x>
       <y>0</y>
       <width>231</width>
-      <height>201</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="font">
@@ -109,80 +112,86 @@ border:none;</string>
     <string>返回</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_3">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>190</y>
-     <width>231</width>
-     <height>47</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border:none;
-background-color: rgb(240, 240, 240);</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_2">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>130</y>
-     <width>231</width>
-     <height>47</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border:none;
-background-color: rgb(240, 240, 240);</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>60</y>
-     <width>111</width>
-     <height>301</height>
+     <y>40</y>
+     <width>91</width>
+     <height>331</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>实验室地点：</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>实验室管理员：</string>
+       <string>课程名称：</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>实验室设备：</string>
+       <string>所属学院：</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>容纳人数：</string>
+       <string>课程学时：</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>拥有软件：</string>
+       <string>课程容量：</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>所需软件：</string>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>110</y>
+     <width>200</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(240, 240, 240);
+border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>180</y>
+     <width>200</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(240, 240, 240);
+border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
