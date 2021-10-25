@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
