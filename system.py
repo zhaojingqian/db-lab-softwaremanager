@@ -1324,6 +1324,7 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
                 self.lable_teacher_sex2.setText(data[3])
                 self.lable_teacher_conn.setText(data[4])
                 self.pushButton.hide()
+                self.pushButton_2.show()
             else:
                 self.lable_teacher_name.setText("null")
                 self.lable_teacher_sex.setText("null")
@@ -1332,6 +1333,7 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
                 self.lable_teacher_sex2.setText("null")
                 self.lable_teacher_conn.setText("null")
                 self.pushButton_2.hide()
+                self.pushButton.show()
         except:
             print("user_id = '%s'")%(id[0])
         cur.close()
@@ -1564,9 +1566,9 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
 
 if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
-    # main_window = main_window()
+    main_window = main_window()
     # main_window = teacher_window()
-    main_window = admin_window()
+    # main_window = admin_window()
     # main_window = coursechange()
 
     main_window.show()
