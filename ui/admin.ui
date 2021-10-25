@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>6</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -82,7 +82,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>课程编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
@@ -179,7 +179,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>实验室编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
@@ -276,7 +276,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>软件编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
@@ -464,7 +464,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>实验室编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
@@ -612,7 +612,7 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>课程编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>

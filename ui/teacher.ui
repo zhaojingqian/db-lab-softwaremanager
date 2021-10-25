@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -84,12 +84,12 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>教师编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -108,7 +108,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -120,7 +120,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -132,7 +132,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -168,12 +168,12 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>课程编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -192,7 +192,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -204,7 +204,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -216,7 +216,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -228,7 +228,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -274,12 +274,12 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>实验室编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -293,24 +293,24 @@ QTabBar::tab{width:120}</string>
      </column>
      <column>
       <property name="text">
-       <string>实验室地点</string>
+       <string>地点</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>实验室管理员</string>
+       <string>管理员</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -322,7 +322,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -334,7 +334,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -370,12 +370,12 @@ QTabBar::tab{width:120}</string>
      </property>
      <column>
       <property name="text">
-       <string>管理员编号</string>
+       <string>编号</string>
       </property>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -394,7 +394,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -406,7 +406,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -418,7 +418,7 @@ QTabBar::tab{width:120}</string>
       <property name="font">
        <font>
         <weight>75</weight>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
