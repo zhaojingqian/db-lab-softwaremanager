@@ -26,9 +26,7 @@ from coursechange_window import Ui_coursechange_window
 from coursearrange_window import Ui_coursearrange_window
 from teacheradd_window import Ui_teahceradd_window
 from userinfo_window import Ui_userinfo_window
-# user_id = 0
-# admin_id = 0
-# teacher_id = 0
+
 # 0是user， 1是admin， 2是teacher
 id = [1, 0, 0]
 
@@ -688,7 +686,6 @@ class userinfo(QtWidgets.QWidget, Ui_userinfo_window):
                     select u.user_id, u.user_type, t.teacher_name user_name, u.user_account, u.user_password, u.user_state from users u left join teacher t on (u.user_id=t.user_id) where u.user_type='教师' and u.user_state=1"
             cur.execute(sql)
             datas = cur.fetchall()
-            print(datas)
             row = 0
             for data in datas:
                 self.tableWidget.setRowCount(row+1)
@@ -1488,7 +1485,7 @@ class change_info(QtWidgets.QWidget, Ui_change_info):
 #----------------------------------------------------------
 
 #----------------------------------------------------------
-#管理员软件详情小窗
+#软件详情小窗
 class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
     def __init__(self):
         super(softwareinfo, self).__init__()
@@ -1502,7 +1499,6 @@ class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
             sql = "select * from software where software_id='%s'"%(select_id[0])
             cur.execute(sql)
             data = cur.fetchone()
-            print(data)
             self.label_software_name.setText(data[1])
             self.label_software_version.setText(data[2]) 
             self.label_software_type.setText(data[3]) 
