@@ -262,7 +262,7 @@ class Ui_admin_window(object):
         self.admin_tab5 = QtWidgets.QWidget()
         self.admin_tab5.setObjectName("admin_tab5")
         self.layoutWidget_2 = QtWidgets.QWidget(self.admin_tab5)
-        self.layoutWidget_2.setGeometry(QtCore.QRect(710, 30, 114, 202))
+        self.layoutWidget_2.setGeometry(QtCore.QRect(710, 30, 114, 261))
         self.layoutWidget_2.setObjectName("layoutWidget_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.layoutWidget_2)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -292,6 +292,12 @@ class Ui_admin_window(object):
         self.cpushButton_4.setFont(font)
         self.cpushButton_4.setObjectName("cpushButton_4")
         self.verticalLayout_3.addWidget(self.cpushButton_4)
+        self.pushButton = QtWidgets.QPushButton(self.layoutWidget_2)
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout_3.addWidget(self.pushButton)
         self.admin_page_5 = QtWidgets.QTableWidget(self.admin_tab5)
         self.admin_page_5.setGeometry(QtCore.QRect(0, 0, 671, 500))
         font = QtGui.QFont()
@@ -417,7 +423,6 @@ class Ui_admin_window(object):
         self.retranslateUi(admin_window)
         self.admin_tabWidget.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(admin_window)
-
         self.button_person_changeinfo.clicked.connect(admin_window.change_personinfo)
         self.spushButton.clicked.connect(admin_window.softwareinfo_button_clicked)
         self.spushButton_2.clicked.connect(admin_window.softwarechange_button_clicked)
@@ -431,6 +436,7 @@ class Ui_admin_window(object):
         self.cpushButton_2.clicked.connect(admin_window.coursechange_button_clicked)
         self.cpushButton_3.clicked.connect(admin_window.coursedelete_button_clicked)       
         self.cpushButton_4.clicked.connect(admin_window.courseadd_button_clicked)
+        self.pushButton.clicked.connect(admin_window.coursearrange_button_clicked)
 
     def retranslateUi(self, admin_window):
         _translate = QtCore.QCoreApplication.translate
@@ -481,6 +487,7 @@ class Ui_admin_window(object):
         self.cpushButton_2.setText(_translate("admin_window", "修改"))
         self.cpushButton_3.setText(_translate("admin_window", "删除"))
         self.cpushButton_4.setText(_translate("admin_window", "添加"))
+        self.pushButton.setText(_translate("admin_window", "排课"))
         item = self.admin_page_5.horizontalHeaderItem(0)
         item.setText(_translate("admin_window", "课程编号"))
         item = self.admin_page_5.horizontalHeaderItem(1)
