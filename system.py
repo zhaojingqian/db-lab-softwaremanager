@@ -1210,6 +1210,7 @@ class change_info(QtWidgets.QWidget, Ui_change_info):
     def __init__(self):
         super(change_info, self).__init__()
         self.setupUi(self)
+        self.displayinfo()
 
     my_singal = QtCore.pyqtSignal(str)
     # def sendEditContent(self):
@@ -1217,6 +1218,24 @@ class change_info(QtWidgets.QWidget, Ui_change_info):
     #     self.my_singal.emit(content)
     def closeEvent(self, event):
         self.my_singal.emit('1')
+
+    def displayinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select admin_name, admin_sex, admin_connect from administrator where user_id='%s'"%(id[0])
+            cur.execute(sql)
+            data = cur.fetchone()
+            self.lineEdit.setText(data[0])
+            self.lineEdit_3.setText(data[2])
+            if data[1]=='男':
+                self.comboBox.setCurrentIndex(0)
+            else:
+                self.comboBox.setCurrentIndex(1)
+        except:
+            print("display admininfo wrong")
+        cur.close()
+        db.close()
 
     def buttonclicked(self):
         name = self.lineEdit.text()
@@ -1498,6 +1517,7 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
     def __init__(self):
         super(change_teacherinfo, self).__init__()
         self.setupUi(self)
+        self.displayinfo()
 
     my_singal = QtCore.pyqtSignal(str)
     # def sendEditContent(self):
@@ -1505,6 +1525,24 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
     #     self.my_singal.emit(content)
     def closeEvent(self, event):
         self.my_singal.emit('1')
+
+    def displayinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select teacher_name, teacher_sex, teacher_connect from teacher where user_id='%s'"%(id[0])
+            cur.execute(sql)
+            data = cur.fetchone()
+            self.lineEdit.setText(data[0])
+            self.lineEdit_3.setText(data[2])
+            if data[1]=='男':
+                self.comboBox.setCurrentIndex(0)
+            else:
+                self.comboBox.setCurrentIndex(1)
+        except:
+            print("display teacherinfo wrong")
+        cur.close()
+        db.close()
     
     def buttonclicked_teacher(self):
         name = self.lineEdit.text()
