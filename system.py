@@ -15,8 +15,8 @@ from change_info import Ui_change_info
 from bondteacher import Ui_bondteacher
 from change_teacherinfo import Ui_change_teacherinfo
 from software_window import Ui_softwareinfo
-from softchange_window import Ui_softwarechange
-from softadd_window import Ui_softwareadd
+from softwarechange_window import Ui_softwarechange
+from softwareadd_window import Ui_softwareadd
 from labchange_window import Ui_lab_change_window
 from labadd_window import Ui_lab_add_window
 from labinfo_window import Ui_lab_info_window
@@ -38,8 +38,7 @@ select_id = [0, 0, 0, 0, 0]
 class main_window(QtWidgets.QWidget, Ui_main_window):
     def __init__(self):
         super(main_window, self).__init__()
-        self.setupUi(self)
-    
+        self.setupUi(self)   
     #登录
     def login(self):
         user = self.text_user.text()
@@ -81,7 +80,6 @@ class main_window(QtWidgets.QWidget, Ui_main_window):
         self.close()
         self.logon_window = logon_window()
         self.logon_window.show()
-
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -243,13 +241,13 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
 
     def updatecourse_view(self):
         self.admin_page.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        # self.teacher_page.verticalHeader().setVisible(False)
+        self.admin_page.verticalHeader().setVisible(False)
         self.admin_page.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.admin_page.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()    
         try:
-            sql = "select * from course"
+            sql = "select course_id, course_name, department, course_period, course_amount from course_software"
             cur.execute(sql)
             datas = cur.fetchall()
             row = 0
@@ -292,12 +290,16 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
     
     def updatesoftware(self):
         self.admin_page_3.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.admin_page_3.verticalHeader().setVisible(False)
         self.admin_page_3.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        # self.admin_page_3.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        self.admin_page_3.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()    
         try:
-            sql = "select software_id, software_name, software_type from software"
+            # sql = "select software_id, software_name from software order by software_id"
+            sql = "select software_id, software_name, type_name from\
+                    software, software_type where software.type_id=software_type.type_id\
+                    order by software_id"
             cur.execute(sql)
             datas = cur.fetchall()
             row = 0
@@ -309,7 +311,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
                     self.admin_page_3.setItem(row, i, item)
                 row = row + 1
         except:
-            print("显示实验室界面失败")
+            print("显示软件界面失败")
         cur.close()
         db.close() 
 
@@ -363,6 +365,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         
     def updatelab(self):
         self.admin_page_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.admin_page_4.verticalHeader().setVisible(False)
         self.admin_page_4.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.admin_page_4.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
@@ -441,6 +444,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
 
     def updatecourse(self):
         self.admin_page_5.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.admin_page_5.verticalHeader().setVisible(False)
         self.admin_page_5.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.admin_page_5.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
@@ -854,12 +858,17 @@ class coursechange(QtWidgets.QWidget, Ui_coursechange_window):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()
         try:
+            sql = "select * from department order by depart_id"
+            cur.execute(sql)
+            departdata = cur.fetchall()
+            for data in departdata:
+                self.comboBox.addItem(data[1])
             sql = "select * from course where course_id='%s'"%(select_id[2])
             cur.execute(sql)
-            data = cur.fetchone()
-
+            data = cur.fetchone() 
+              
             self.lineEdit.setText(data[1])
-            self.lineEdit_2.setText(data[2])
+            self.comboBox.setCurrentIndex(data[2]-1)           
             self.lineEdit_3.setText(data[3])
             self.lineEdit_4.setText(data[4])
             
@@ -892,14 +901,14 @@ class coursechange(QtWidgets.QWidget, Ui_coursechange_window):
         cur = db.cursor()
 
         name = self.lineEdit.text()
-        depart = self.lineEdit_2.text()
+        departid = self.comboBox.currentIndex()+1
         period = self.lineEdit_3.text()
         amount = self.lineEdit_4.text()
 
         #update course
-        sql = "update course set course_name='%s', department='%s',\
+        sql = "update course set course_name='%s', depart_id='%s',\
                 course_period='%s', course_amount='%s'where course_id\
-                ='%s'"%(name, depart, period, amount, select_id[2])
+                ='%s'"%(name, departid, period, amount, select_id[2])
         cur.execute(sql)
 
         #now bond lab have softwareid
@@ -977,6 +986,17 @@ class courseadd(QtWidgets.QWidget, Ui_courseadd_window):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()
         try:
+            sql = "select * from department order by depart_id"
+            cur.execute(sql)
+            departdata = cur.fetchall()
+            for data in departdata:
+                self.comboBox.addItem(data[1])
+            # print(departdata)
+
+        except:
+            print("显示学院失败！")
+
+        try:
             sql = "select software_id, software_name from software order by software_id"
             cur.execute(sql)
             allsoftdatas = cur.fetchall()
@@ -998,10 +1018,11 @@ class courseadd(QtWidgets.QWidget, Ui_courseadd_window):
         cur = db.cursor()
         
         name = self.lineEdit.text()
-        depart = self.lineEdit_2.text()
+        # depart = self.lineEdit_2.text()
+        departid = self.comboBox.currentIndex()+1
         period = self.lineEdit_3.text()
         amount = self.lineEdit_4.text()
-
+        print(departid)
         #获得id
         sql = "select course_id from course order by course_id"
         cur.execute(sql)
@@ -1010,7 +1031,7 @@ class courseadd(QtWidgets.QWidget, Ui_courseadd_window):
         #新增课程
         try:
             sql = "insert into course values('%s', '%s', '%s', '%s', '%s')"\
-                %(last_id+1, name, depart, period, amount)
+                %(last_id+1, name, departid, period, amount)
             cur.execute(sql)
             db.commit()
         except:
@@ -1051,16 +1072,13 @@ class courseinfo(QtWidgets.QWidget, Ui_courseinfo_window):
             sql = "select * from course_software where course_id='%s'"%(select_id[2])
             cur.execute(sql)
             data = cur.fetchone()
-            sql = "select department from course where course_id='%s'"%(select_id[2])
-            cur.execute(sql)
-            depatment = cur.fetchone()[0]
 
             self.label1.setText(data[1])
-            self.label2.setText(data[2])
-            self.label3.setText(depatment)
-            self.label4.setText(data[3])
-            self.label5.setText(data[4])
-            self.textBrowser.setText(data[6])
+            self.label2.setText(data[3])
+            self.label3.setText(data[2])
+            self.label4.setText(data[4])
+            self.label5.setText(data[5])
+            self.textBrowser.setText(data[7])
         except:
             print("display course info wrong")
         cur.close()
@@ -1343,11 +1361,26 @@ class softadd(QtWidgets.QWidget, Ui_softwareadd):
     def __init__(self):
         super(softadd, self).__init__()
         self.setupUi(self)
+        self.displayinfo()
 
-    
     my_singal = QtCore.pyqtSignal(str)
     def closeEvent(self, event):
         self.my_singal.emit('1')
+
+    def displayinfo(self):
+        try:
+            db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+            cur = db.cursor()
+
+            sql = "select * from software_type order by type_id"
+            cur.execute(sql)
+            datas = cur.fetchall()
+            for data in datas:
+                self.comboBox.addItem(data[1])
+        except:
+            print("显示软件修改窗口失败！")
+        cur.close()
+        db.close()  
 
     def softcommit_button_clicked(self):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
@@ -1355,7 +1388,7 @@ class softadd(QtWidgets.QWidget, Ui_softwareadd):
 
         name = self.lineEdit.text()
         version = self.lineEdit_2.text()
-        type = self.lineEdit_3.text()
+        typeid = self.comboBox.currentIndex()+1
         arch = self.lineEdit_4.text()
         memory = self.lineEdit_5.text()
         info = self.textEdit.toPlainText()
@@ -1366,7 +1399,7 @@ class softadd(QtWidgets.QWidget, Ui_softwareadd):
         try:   
             sql = "insert into software values\
                     ('%s', '%s', '%s', '%s', '%s', '%s', '%s')"\
-                    %(last_id+1,name,version,type,arch,memory,info)
+                    %(last_id+1,name,typeid,version,arch,memory,info)
             cur.execute(sql)
             db.commit()
             QMessageBox.information(self,"提示","添加成功！",QMessageBox.Yes)
@@ -1394,17 +1427,22 @@ class softchange(QtWidgets.QWidget, Ui_softwarechange):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()
         try:
+            sql = "select * from software_type order by type_id"
+            cur.execute(sql)
+            typedatas = cur.fetchall()
+            for data in typedatas:
+                self.comboBox.addItem(data[1])
+
             sql = "select * from software where software_id='%s'"%(select_id[0])
             cur.execute(sql)
             data = cur.fetchone()
-            print(data)
             self.lineEdit.setText(data[1])
-            self.lineEdit_2.setText(data[2]) 
-            self.lineEdit_3.setText(data[3]) 
+            self.lineEdit_2.setText(data[3]) 
+            # self.lineEdit_3.setText(data[3]) 
+            self.comboBox.setCurrentIndex(data[2]-1)
             self.lineEdit_4.setText(data[4]) 
             self.lineEdit_5.setText(data[5]) 
             self.textEdit.setText(data[6]) 
-            # self.close()
         except:
             print("显示软件详情失败！")
         cur.close()
@@ -1416,16 +1454,17 @@ class softchange(QtWidgets.QWidget, Ui_softwarechange):
 
         name = self.lineEdit.text()
         version = self.lineEdit_2.text()
-        type = self.lineEdit_3.text()
+        # type = self.lineEdit_3.text()
+        typeid = self.comboBox.currentIndex() + 1
         arch = self.lineEdit_4.text()
         memory = self.lineEdit_5.text()
         info = self.textEdit.toPlainText()
         # print(info)
         try:   
-            sql = "update software set software_name='%s', software_version='%s', software_type='%s',\
+            sql = "update software set software_name='%s', software_version='%s', type_id='%s',\
                     software_arch='%s', software_memory='%s', software_info='%s'\
                     where software_id='%s'"\
-                    %(name,version,type,arch,memory,info,select_id[0])
+                    %(name,version,typeid,arch,memory,info,select_id[0])
             cur.execute(sql)
             db.commit()
             QMessageBox.information(self,"提示","修改成功！",QMessageBox.Yes)
@@ -1435,6 +1474,34 @@ class softchange(QtWidgets.QWidget, Ui_softwarechange):
 
         cur.close()
         db.close()  
+#----------------------------------------------------------
+
+#----------------------------------------------------------
+#软件详情小窗
+class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
+    def __init__(self):
+        super(softwareinfo, self).__init__()
+        self.setupUi(self)
+        self.updatesoftwareinfo()
+
+    def updatesoftwareinfo(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()
+        try:
+            sql = "select software_id, software_name, software_version, type_name, software_arch, software_memory, software_info from software, software_type where software.type_id=software_type.type_id\
+                    and software_id='%s'"%(select_id[0])
+            cur.execute(sql)
+            data = cur.fetchone()
+            self.label_software_name.setText(data[1])
+            self.label_software_version.setText(data[2]) 
+            self.label_software_type.setText(data[3]) 
+            self.label_software_arch.setText(data[4]) 
+            self.label_software_memery.setText(data[5]) 
+            self.textBrowser.setText(data[6]) 
+        except:
+            print("显示软件详情失败！")
+        cur.close()
+        db.close()        
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1482,33 +1549,6 @@ class change_info(QtWidgets.QWidget, Ui_change_info):
             self.close()
         except:
             print("更新个人信息失败")
-#----------------------------------------------------------
-
-#----------------------------------------------------------
-#软件详情小窗
-class softwareinfo(QtWidgets.QWidget, Ui_softwareinfo):
-    def __init__(self):
-        super(softwareinfo, self).__init__()
-        self.setupUi(self)
-        self.updatesoftwareinfo()
-
-    def updatesoftwareinfo(self):
-        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
-        cur = db.cursor()
-        try:
-            sql = "select * from software where software_id='%s'"%(select_id[0])
-            cur.execute(sql)
-            data = cur.fetchone()
-            self.label_software_name.setText(data[1])
-            self.label_software_version.setText(data[2]) 
-            self.label_software_type.setText(data[3]) 
-            self.label_software_arch.setText(data[4]) 
-            self.label_software_memery.setText(data[5]) 
-            self.textBrowser.setText(data[6]) 
-        except:
-            print("显示软件详情失败！")
-        cur.close()
-        db.close()        
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1566,10 +1606,9 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
         self.change_teacherinfo.my_singal.connect(self.update_teacher_info)
         self.change_teacherinfo.show()
 
-
     def updateteacher_view(self):
         self.teacher_page.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        # self.teacher_page.verticalHeader().setVisible(False)
+        self.teacher_page.verticalHeader().setVisible(False)
         # self.teacher_page.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents) 
@@ -1597,14 +1636,14 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
     
     def updatecourse_view(self):
         self.teacher_page_2.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        # self.teacher_page.verticalHeader().setVisible(False)
+        self.teacher_page_2.verticalHeader().setVisible(False)
         # self.teacher_page_2.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page_2.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page_2.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents) 
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()    
         try:
-            sql = "select * from course"
+            sql = "select course_id, course_name, department, course_period, course_amount from course_software"
             cur.execute(sql)
             datas = cur.fetchall()
 
@@ -1655,7 +1694,7 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
 
     def updateadmini_view(self):
         self.teacher_page_4.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        # self.teacher_page.verticalHeader().setVisible(False)
+        self.teacher_page_4.verticalHeader().setVisible(False)
         # self.teacher_page_4.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page_4.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.teacher_page_4.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents) 
@@ -1683,7 +1722,6 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
 #----------------------------------------------------------
 #教师个人信息绑定小窗
 class bondteacher(QtWidgets.QWidget, Ui_bondteacher):
-
     def __init__(self):
         super(bondteacher, self).__init__()
         self.setupUi(self)

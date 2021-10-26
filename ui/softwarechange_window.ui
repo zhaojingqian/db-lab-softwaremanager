@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>softwareadd</class>
- <widget class="QWidget" name="softwareadd">
+ <class>softwarechange</class>
+ <widget class="QWidget" name="softwarechange">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -47,8 +47,8 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>50</y>
+     <x>149</x>
+     <y>49</y>
      <width>200</width>
      <height>47</height>
     </rect>
@@ -57,54 +57,63 @@
     <string notr="true">background-color: rgb(240, 240, 240);
 border:none;</string>
    </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>320</y>
-     <width>391</width>
-     <height>101</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(240, 240, 240);
-border:none;</string>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>100</y>
+     <x>149</x>
+     <y>105</y>
      <width>200</width>
-     <height>47</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(240, 240, 240);
 border:none;</string>
    </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>150</y>
-     <width>200</width>
-     <height>47</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(240, 240, 240);
-border:none;</string>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_4">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>210</y>
+     <x>149</x>
+     <y>219</y>
+     <width>200</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(240, 240, 240);
+border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>149</x>
+     <y>165</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+background-color: rgb(240, 240, 240);</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_5">
+   <property name="geometry">
+    <rect>
+     <x>149</x>
+     <y>259</y>
      <width>200</width>
      <height>47</height>
     </rect>
@@ -113,14 +122,17 @@ border:none;</string>
     <string notr="true">background-color: rgb(240, 240, 240);
 border:none;</string>
    </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
+  <widget class="QTextEdit" name="textEdit">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>260</y>
-     <width>200</width>
-     <height>47</height>
+     <x>149</x>
+     <y>319</y>
+     <width>391</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -131,10 +143,10 @@ border:none;</string>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>51</x>
-     <y>51</y>
+     <x>50</x>
+     <y>50</y>
      <width>77</width>
-     <height>301</height>
+     <height>311</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">

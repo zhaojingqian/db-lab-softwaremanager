@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\softwareadd_window.ui'
+# Form implementation generated from reading ui file 'softwareadd_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -28,6 +28,7 @@ class Ui_softwareadd(object):
         self.lineEdit.setGeometry(QtCore.QRect(150, 50, 200, 47))
         self.lineEdit.setStyleSheet("background-color: rgb(240, 240, 240);\n"
 "border:none;")
+        self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
         self.textEdit = QtWidgets.QTextEdit(softwareadd)
         self.textEdit.setGeometry(QtCore.QRect(150, 320, 391, 101))
@@ -35,27 +36,25 @@ class Ui_softwareadd(object):
 "border:none;")
         self.textEdit.setObjectName("textEdit")
         self.lineEdit_2 = QtWidgets.QLineEdit(softwareadd)
-        self.lineEdit_2.setGeometry(QtCore.QRect(150, 100, 200, 47))
+        self.lineEdit_2.setGeometry(QtCore.QRect(150, 106, 200, 41))
         self.lineEdit_2.setStyleSheet("background-color: rgb(240, 240, 240);\n"
 "border:none;")
+        self.lineEdit_2.setText("")
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_3 = QtWidgets.QLineEdit(softwareadd)
-        self.lineEdit_3.setGeometry(QtCore.QRect(150, 150, 200, 47))
-        self.lineEdit_3.setStyleSheet("background-color: rgb(240, 240, 240);\n"
-"border:none;")
-        self.lineEdit_3.setObjectName("lineEdit_3")
         self.lineEdit_4 = QtWidgets.QLineEdit(softwareadd)
-        self.lineEdit_4.setGeometry(QtCore.QRect(150, 210, 200, 47))
+        self.lineEdit_4.setGeometry(QtCore.QRect(150, 220, 200, 31))
         self.lineEdit_4.setStyleSheet("background-color: rgb(240, 240, 240);\n"
 "border:none;")
+        self.lineEdit_4.setText("")
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.lineEdit_5 = QtWidgets.QLineEdit(softwareadd)
         self.lineEdit_5.setGeometry(QtCore.QRect(150, 260, 200, 47))
         self.lineEdit_5.setStyleSheet("background-color: rgb(240, 240, 240);\n"
 "border:none;")
+        self.lineEdit_5.setText("")
         self.lineEdit_5.setObjectName("lineEdit_5")
         self.layoutWidget = QtWidgets.QWidget(softwareadd)
-        self.layoutWidget.setGeometry(QtCore.QRect(51, 51, 77, 301))
+        self.layoutWidget.setGeometry(QtCore.QRect(51, 51, 77, 311))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -78,11 +77,16 @@ class Ui_softwareadd(object):
         self.label_6 = QtWidgets.QLabel(self.layoutWidget)
         self.label_6.setObjectName("label_6")
         self.verticalLayout.addWidget(self.label_6)
+        self.comboBox = QtWidgets.QComboBox(softwareadd)
+        self.comboBox.setGeometry(QtCore.QRect(150, 166, 221, 31))
+        self.comboBox.setStyleSheet("border:none;\n"
+"background-color: rgb(240, 240, 240);")
+        self.comboBox.setObjectName("comboBox")
 
         self.retranslateUi(softwareadd)
+        QtCore.QMetaObject.connectSlotsByName(softwareadd)
         self.pushButton.clicked.connect(softwareadd.softcommit_button_clicked)
         self.pushButton_2.clicked.connect(softwareadd.close)
-        QtCore.QMetaObject.connectSlotsByName(softwareadd)
 
     def retranslateUi(self, softwareadd):
         _translate = QtCore.QCoreApplication.translate

@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -492,9 +492,9 @@ QTabBar::tab{width:120}</string>
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>150</y>
+       <y>130</y>
        <width>231</width>
-       <height>16</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">

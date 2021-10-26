@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2021/10/19 11:24:30                          */
+/* Created on:     2021/10/25 23:07:39                          */
 /*==============================================================*/
 
 
@@ -15,8 +15,8 @@ create table administrator
 (
    admin_id             int not null,
    user_id              int not null,
-   admin_name           char(20) not null,
-   admin_sex            char(10),
+   admin_name           char(20),
+   admin_sex            char(10) not null,
    admin_connect        char(20),
    primary key (admin_id)
 );
@@ -28,10 +28,20 @@ create table course
 (
    course_id            int not null,
    course_name          char(20) not null,
-   department           char(20) not null,
+   depart_id            int not null,
    course_period        char(20) not null,
    course_amount        char(20),
    primary key (course_id)
+);
+
+/*==============================================================*/
+/* Table: department                                            */
+/*==============================================================*/
+create table department
+(
+   depart_id            int not null,
+   depart_name          char(20) not null,
+   primary key (depart_id)
 );
 
 /*==============================================================*/
@@ -40,7 +50,7 @@ create table course
 create table equipment
 (
    equipment_id         int not null,
-   equipment_type       char(20),
+   equipment_type       char(20) not null,
    equipment_config     text not null,
    equipment_os         char(20),
    equipment_scale      char(20) not null,
@@ -77,8 +87,8 @@ create table software
 (
    software_id          int not null,
    software_name        char(20) not null,
+   type_id              int not null,
    software_version     char(20),
-   software_type        char(20),
    software_arch        char(20),
    software_memory      char(20),
    software_info        text,
@@ -106,24 +116,13 @@ create table software_need
 );
 
 /*==============================================================*/
-/* Table: student                                               */
+/* Table: software_type                                         */
 /*==============================================================*/
-create table student
+create table software_type
 (
-   student_id           int not null,
-   student_name         char(20) not null,
-   student_sex          char(10) not null,
-   primary key (student_id)
-);
-
-/*==============================================================*/
-/* Table: student_course                                        */
-/*==============================================================*/
-create table student_course
-(
-   course_id            int not null,
-   student_id           int not null,
-   primary key (course_id, student_id)
+   type_id              int not null,
+   type_name            char(20) not null,
+   primary key (type_id)
 );
 
 /*==============================================================*/
@@ -144,7 +143,7 @@ create table teacher
    teacher_id           int not null,
    user_id              int,
    teacher_name         char(20) not null,
-   teacher_sex          char(10),
+   teacher_sex          char(10) not null,
    teacher_connect      char(20),
    primary key (teacher_id)
 );
@@ -155,17 +154,18 @@ create table teacher
 create table users
 (
    user_id              int not null,
-   -- user_name            char(20),
    user_type            char(20) not null,
-   user_account         char(10) not null,
+   user_account         char(20) not null,
    user_password        varchar(20) not null,
    user_state           numeric(1,0) not null,
-   -- user_connect         char(20),
    primary key (user_id)
 );
 
 alter table administrator add constraint FK_subordinate_1 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
+
+alter table course add constraint FK_course_department foreign key (depart_id)
+      references department (depart_id) on delete restrict on update restrict;
 
 alter table lab add constraint FK_manage foreign key (admin_id)
       references administrator (admin_id) on delete restrict on update restrict;
@@ -179,6 +179,9 @@ alter table lab_course add constraint FK_lab_course foreign key (course_id)
 alter table lab_course add constraint FK_lab_course2 foreign key (lab_id)
       references lab (lab_id) on delete restrict on update restrict;
 
+alter table software add constraint FK_software_type foreign key (type_id)
+      references software_type (type_id) on delete restrict on update restrict;
+
 alter table software_have add constraint FK_software_have foreign key (software_id)
       references software (software_id) on delete restrict on update restrict;
 
@@ -191,12 +194,6 @@ alter table software_need add constraint FK_software_need foreign key (software_
 alter table software_need add constraint FK_software_need2 foreign key (course_id)
       references course (course_id) on delete restrict on update restrict;
 
-alter table student_course add constraint FK_student_course foreign key (course_id)
-      references course (course_id) on delete restrict on update restrict;
-
-alter table student_course add constraint FK_student_course2 foreign key (student_id)
-      references student (student_id) on delete restrict on update restrict;
-
 alter table teach_course add constraint FK_teach_course foreign key (course_id)
       references course (course_id) on delete restrict on update restrict;
 
@@ -206,15 +203,6 @@ alter table teach_course add constraint FK_teach_course2 foreign key (teacher_id
 alter table teacher add constraint FK_subordinate_2 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
       
-      
--- alter table course add constraint fk_course_lab foreign key (course_id)
--- 	  references lab_course (course_id) on delete cascade;
---       
--- alter table course add constraint fk_course_software foreign key (course_id)
--- 	  references software_need (course_id) on delete cascade;
-
-
-
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -223,6 +211,7 @@ VIEW `course_software` AS
     SELECT 
         `t`.`course_id` AS `course_id`,
         `t`.`course_name` AS `course_name`,
+        `t`.`department` AS `department`,
         GROUP_CONCAT(DISTINCT `t`.`teacher_name`
             SEPARATOR '、') AS teacher,
         `t`.course_period AS course_period,
@@ -235,22 +224,24 @@ VIEW `course_software` AS
         (SELECT 
             course.course_id AS course_id,
                 course.course_name AS course_name,
+                department.depart_name AS department,
                 teacher.teacher_name AS teacher_name,
                 course.course_period AS course_period,
                 course.course_amount AS course_amount,
                 lab.lab_address AS lab_address,
                 software.software_name AS software_name
         FROM
-            ((((((course
+            (((((((course
         LEFT JOIN teach_course ON ((course.course_id = teach_course.course_id)))
         LEFT JOIN teacher ON ((teacher.teacher_id = teach_course.teacher_id)))
         LEFT JOIN lab_course ON ((lab_course.course_id = course.course_id)))
         LEFT JOIN lab ON ((lab_course.lab_id = lab.lab_id)))
         LEFT JOIN software_need ON ((software_need.course_id = course.course_id)))
-        LEFT JOIN software ON ((software_need.software_id = software.software_id)))) t
+        LEFT JOIN software ON ((software_need.software_id = software.software_id)))
+        LEFT JOIN department ON ((course.depart_id = department.depart_id)))) t
     GROUP BY `t`.course_id;
     
-CREATE 
+    CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
@@ -272,7 +263,7 @@ VIEW `lab_software` AS
         LEFT JOIN equipment ON (lab.equipment_id = equipment.equipment_id)) AS t
     GROUP BY lab_address;
     
-CREATE 
+    CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
@@ -298,27 +289,7 @@ VIEW `teacher_course` AS
         LEFT JOIN `lab` `l` ON (`l`.`lab_id` = `lc`.`lab_id`))) `t`
     GROUP BY `t`.`teacher_id`;
     
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `course_student` AS
-    SELECT 
-        `t`.`course_id` AS `course_id`,
-        GROUP_CONCAT(`t`.`student_name`
-            SEPARATOR ',') AS `student_name`
-    FROM
-        (SELECT 
-            `c`.`course_id` AS `course_id`,
-                `s`.`student_name` AS `student_name`
-        FROM
-            ((`course` `c`
-        LEFT JOIN `student_course` `sc` ON ((`c`.`course_id` = `sc`.`course_id`)))
-        LEFT JOIN `student` `s` ON ((`sc`.`student_id` = `s`.`student_id`)))) `t`
-    GROUP BY `t`.`course_id`;
-    
-    
-DELIMITER ;;
+    DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` TRIGGER `lab_course_BEFORE_INSERT` BEFORE INSERT ON `lab_course` FOR EACH ROW BEGIN
 if new.lab_id not in (select distinct l1.lab_id
 from lab as l1 left join software_have as sh1 on(l1.lab_id=sh1.lab_id) left join software as s1 on(s1.software_id=sh1.software_id)
@@ -337,7 +308,6 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `course_BEFORE_DELETE` BEFORE DELETE O
 	delete from lab_course where course_id = old.course_id;
     delete from software_need where course_id = old.course_id;
     delete from teach_course where course_id = old.course_id;
-    delete from student_course where course_id = old.course_id;
 END;;
 DELIMITER ;
 
@@ -358,7 +328,3 @@ create index index_lab_address on lab
 	lab_address
 );
 
-create index index_student_name on student
-(
-	student_name
-);

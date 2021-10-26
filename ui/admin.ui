@@ -44,7 +44,7 @@
 QTabBar::tab{width:120}</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>6</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -302,6 +302,17 @@ QTabBar::tab{width:120}</string>
        <font>
         <weight>75</weight>
         <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>软件类型</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -917,9 +928,9 @@ QTabBar::tab{width:120}</string>
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>140</y>
+       <y>130</y>
        <width>231</width>
-       <height>16</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">

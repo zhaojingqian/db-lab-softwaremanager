@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_teacher_window(object):
     def setupUi(self, teacher_window):
         teacher_window.setObjectName("teacher_window")
-        teacher_window.resize(850, 650)
+        teacher_window.resize(850, 649)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         teacher_window.setFont(font)
@@ -242,7 +242,7 @@ class Ui_teacher_window(object):
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.lable_teacher_conn = QtWidgets.QLabel(self.teacher_tab5)
-        self.lable_teacher_conn.setGeometry(QtCore.QRect(160, 150, 231, 16))
+        self.lable_teacher_conn.setGeometry(QtCore.QRect(160, 130, 231, 51))
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         self.lable_teacher_conn.setFont(font)
@@ -292,10 +292,10 @@ class Ui_teacher_window(object):
         self.lable_teacher_type.setObjectName("lable_teacher_type")
 
         self.retranslateUi(teacher_window)
-        self.teacher_tabWidget.setCurrentIndex(1)
+        self.teacher_tabWidget.setCurrentIndex(4)
+        QtCore.QMetaObject.connectSlotsByName(teacher_window)
         self.pushButton.clicked.connect(teacher_window.change_teacher)
         self.pushButton_2.clicked.connect(teacher_window.change_info)
-        QtCore.QMetaObject.connectSlotsByName(teacher_window)
 
     def retranslateUi(self, teacher_window):
         _translate = QtCore.QCoreApplication.translate

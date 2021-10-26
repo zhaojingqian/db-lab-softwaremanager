@@ -73,24 +73,23 @@ class Ui_courseadd_window(object):
         self.label_10 = QtWidgets.QLabel(self.layoutWidget)
         self.label_10.setObjectName("label_10")
         self.verticalLayout.addWidget(self.label_10)
-        self.lineEdit_2 = QtWidgets.QLineEdit(courseadd_window)
-        self.lineEdit_2.setGeometry(QtCore.QRect(150, 110, 200, 61))
-        self.lineEdit_2.setStyleSheet("background-color: rgb(240, 240, 240);\n"
-"border:none;")
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setObjectName("lineEdit_2")
         self.lineEdit_3 = QtWidgets.QLineEdit(courseadd_window)
         self.lineEdit_3.setGeometry(QtCore.QRect(150, 180, 200, 51))
         self.lineEdit_3.setStyleSheet("background-color: rgb(240, 240, 240);\n"
 "border:none;")
         self.lineEdit_3.setText("")
         self.lineEdit_3.setObjectName("lineEdit_3")
+        self.comboBox = QtWidgets.QComboBox(courseadd_window)
+        self.comboBox.setGeometry(QtCore.QRect(150, 130, 200, 21))
+        self.comboBox.setStyleSheet("border:none;\n"
+"background-color: rgb(240, 240, 240);")
+        self.comboBox.setObjectName("comboBox")
 
         self.retranslateUi(courseadd_window)
         QtCore.QMetaObject.connectSlotsByName(courseadd_window)
         self.pushButton.clicked.connect(courseadd_window.coursecommit_button_clicked)
         self.pushButton_2.clicked.connect(courseadd_window.close)
-    
+
     def retranslateUi(self, courseadd_window):
         _translate = QtCore.QCoreApplication.translate
         courseadd_window.setWindowTitle(_translate("courseadd_window", "课程详情"))
