@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets,QtCore,QtGui
-# from PyQt5.QtWidgets import QTableWidgetItem,QMessageBox,QAction,QMenu,QAbstractItemView, QWidget
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt,QPoint
 import pymysql
@@ -157,7 +156,6 @@ class logon_window(QtWidgets.QWidget, Ui_logon_window):
                             user_type = "管理员"
                             sql = "insert into users values('%s', '%s', '%s', '%s', '%s')"%(id[0], user_type, user, pwd, "1")
                             cur.execute(sql)
-                            # db.commit()
                             print("添加完成！")
                             #添加管理员信息
                             sql = "select * from administrator"
@@ -744,6 +742,8 @@ class teacheradd(QtWidgets.QWidget, Ui_teahceradd_window):
 
         except:
             print("add teacher wrong")
+        cur.close()
+        db.close()
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1353,6 +1353,8 @@ class labchange(QtWidgets.QWidget, Ui_lab_change_window):
             self.close()
         except:
             print("修改失败！")
+        cur.close()
+        db.close() 
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1549,6 +1551,8 @@ class change_info(QtWidgets.QWidget, Ui_change_info):
             self.close()
         except:
             print("更新个人信息失败")
+        cur.close()
+        db.close() 
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1818,6 +1822,8 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
             self.close()
         except:
             print("更新个人信息失败")
+        cur.close()
+        db.close() 
 #----------------------------------------------------------
 
 if __name__=='__main__':
