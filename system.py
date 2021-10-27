@@ -1993,9 +1993,9 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
 
 if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
-    # main_window = main_window()
+    main_window = main_window()
     # main_window = teacher_window()
-    main_window = admin_window()
+    # main_window = admin_window()
     # main_window = coursechange()
     main_window.show()
     sys.exit(app.exec_())
