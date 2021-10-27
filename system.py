@@ -1286,16 +1286,16 @@ class labinfo(QtWidgets.QWidget, Ui_lab_info_window):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()
         try:
-            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, equipment.equipment_id, administrator.admin_id, lab.lab_scale\
-                    from equipment, administrator, lab  \
-                    where lab.equipment_id=equipment.equipment_id and lab.admin_id = administrator.admin_id and lab.lab_id='%s'\
+            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, lab.lab_scale\
+                    from administrator, lab  \
+                    where lab.admin_id = administrator.admin_id and lab.lab_id='%s'\
                     "%(select_id[1])
             cur.execute(sql)
             data = cur.fetchone()
 
             self.label_6.setText(data[1])
             self.label_7.setText(data[2])
-            self.label_9.setText(data[5])
+            self.label_9.setText(data[3])
             sql = "select software,equipment_config from lab_software where lab_id='%s'"%(select_id[1])
             cur.execute(sql)
             info = cur.fetchone()

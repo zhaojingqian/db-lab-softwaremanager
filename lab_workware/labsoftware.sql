@@ -63,7 +63,7 @@ create table equipment
 create table lab
 (
    lab_id               int not null,
-   equipment_id         int,
+   equipment_id         int not null,
    admin_id             int not null,
    lab_address          char(20) not null,
    lab_scale            char(20) not null,
@@ -289,7 +289,7 @@ VIEW `teacher_course` AS
         LEFT JOIN `lab` `l` ON (`l`.`lab_id` = `lc`.`lab_id`))) `t`
     GROUP BY `t`.`teacher_id`;
     
-    DELIMITER ;;
+DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` TRIGGER `lab_course_BEFORE_INSERT` BEFORE INSERT ON `lab_course` FOR EACH ROW BEGIN
 if new.lab_id not in (select distinct l1.lab_id
 from lab as l1 left join software_have as sh1 on(l1.lab_id=sh1.lab_id) left join software as s1 on(s1.software_id=sh1.software_id)
@@ -328,3 +328,17 @@ create index index_lab_address on lab
 	lab_address
 );
 
+create index index_course_name on course
+(
+	course_name
+);
+
+create index index_teacher_name on teacher
+(
+	teacher_name
+);
+
+create index index_admin_name on administrator
+(
+	admin_name
+);
