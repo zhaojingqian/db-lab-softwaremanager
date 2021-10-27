@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>admin_window</class>
+ <widget class="QWidget" name="admin_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>850</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>管理员窗口</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QTabWidget" name="admin_tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>850</width>
+     <height>550</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::TabFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTabBar::tab{height:40}
+QTabBar::tab{width:120}</string>
+   </property>
+   <property name="currentIndex">
+    <number>3</number>
+   </property>
+   <property name="elideMode">
+    <enum>Qt::ElideNone</enum>
+   </property>
+   <property name="tabBarAutoHide">
+    <bool>false</bool>
+   </property>
+   <widget class="QWidget" name="admin_tab1">
+    <attribute name="title">
+     <string>课程信息</string>
+    </attribute>
+    <widget class="QTableWidget" name="admin_page">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>850</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程名称</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>所属学院</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程学时</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程容量</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab2">
+    <attribute name="title">
+     <string>实验室信息</string>
+    </attribute>
+    <widget class="QTableWidget" name="admin_page_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>850</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室地点</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室管理员</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>设备配置</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>配套软件</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab3">
+    <attribute name="title">
+     <string>软件管理 </string>
+    </attribute>
+    <widget class="QTableWidget" name="admin_page_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>软件名称</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>软件类型</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>30</y>
+       <width>114</width>
+       <height>202</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="spushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>查看详情</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="spushButton_2">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>修改</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="spushButton_3">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="spushButton_4">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>添加</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab4">
+    <attribute name="title">
+     <string>实验室管理</string>
+    </attribute>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>30</y>
+       <width>114</width>
+       <height>202</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="lpushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>查看详情</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="lpushButton_2">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>修改</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="lpushButton_3">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="lpushButton_4">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>添加</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTableWidget" name="admin_page_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室地点</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>实验室管理员</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab5">
+    <attribute name="title">
+     <string>课程管理</string>
+    </attribute>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>30</y>
+       <width>114</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="cpushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>查看详情</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cpushButton_2">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>修改</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cpushButton_3">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cpushButton_4">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>添加</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>排课</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTableWidget" name="admin_page_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程名称</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>授课教师</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程地点</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab6">
+    <attribute name="title">
+     <string>用户管理</string>
+    </attribute>
+    <widget class="QTableWidget" name="admin_page_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>330</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>教师编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>教师姓名</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QTableWidget" name="admin_page_7">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>0</y>
+       <width>330</width>
+       <height>500</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+</string>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>管理员编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="background">
+       <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>管理员姓名</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_12">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>30</y>
+       <width>114</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="tpushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>添加教师</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="tpushButton_2">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>删除教师</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="apushButton">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>查看所有用户</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="apushButton_2">
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>删除管理员</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="admin_tab7">
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <attribute name="title">
+     <string>个人信息</string>
+    </attribute>
+    <widget class="QLabel" name="lable_admin_sex_2">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>100</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lable_admin_name_2">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>60</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>140</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>联系方式：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lable_admin_sex_3">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>120</y>
+       <width>72</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lable_admin_conn">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>130</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>100</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>性别：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>姓名：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_person_changeinfo">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>430</y>
+       <width>93</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>修改信息</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>姓名：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>20</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>性别：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>20</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>权限：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lable_admin_name">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>20</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lable_admin_sex">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>20</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lable_admin_type">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>20</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="query_button">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>60</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>60</y>
+     <width>211</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>60</y>
+     <width>87</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <item>
+    <property name="text">
+     <string>请选择</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>软件</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>实验室</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>课程</string>
+    </property>
+   </item>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_4</zorder>
+  <zorder>lable_admin_name</zorder>
+  <zorder>lable_admin_sex</zorder>
+  <zorder>lable_admin_type</zorder>
+  <zorder>admin_tabWidget</zorder>
+  <zorder>query_button</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>comboBox</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

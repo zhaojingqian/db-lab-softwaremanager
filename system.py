@@ -210,6 +210,8 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         self.updatecourse() 
         self.updateteacher()
         self.updateadmin()
+        # self.comboBox.setCurrentIndex(0)
+        # self.lineEdit.setText('')
 
     def update_admin_info(self):
         #个人信息界面
@@ -369,7 +371,7 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
         cur = db.cursor()    
         try:
-            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, lab_software.equipment_config, lab_software.software from lab_software, administrator, lab where\
+            sql = "select lab.lab_id, lab.lab_address, administrator.admin_name from lab_software, administrator, lab where\
                     lab_software.lab_id=lab.lab_id and lab.admin_id = administrator.admin_id\
                     order by lab.lab_id"
             cur.execute(sql)
@@ -664,6 +666,82 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
     def userinfo_button_clicked(self):
         self.userinfo = userinfo()
         self.userinfo.show()
+
+    def query_button_clicked(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()   
+        page = self.comboBox.currentIndex()
+        string = self.lineEdit.text()
+        arg = '%'+string+'%'
+
+        if page == 1:
+            self.admin_tabWidget.setCurrentIndex(2)
+            try:
+                # sql = "select software_id, software_name from software order by software_id"
+                sql = "select software_id, software_name, type_name from\
+                        software, software_type where software.type_id=software_type.type_id\
+                        and software_name like '%s'\
+                        order by software_id"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.admin_page_3.setRowCount(row+1)
+                        for i in range(len(data)):   
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.admin_page_3.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.admin_page_3.setRowCount(0)
+            except:
+                print("查询软件失败")
+
+        elif page == 2:
+            self.admin_tabWidget.setCurrentIndex(3)
+            try:
+                sql = "select lab.lab_id, lab.lab_address, administrator.admin_name from lab_software, administrator, lab where\
+                        lab_software.lab_id=lab.lab_id and lab.admin_id = administrator.admin_id\
+                        and lab.lab_address like '%s'\
+                        order by lab.lab_id"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.admin_page_4.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.admin_page_4.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.admin_page_4.setRowCount(0)
+            except:
+                print("查询实验室失败")
+
+        elif page == 3:
+            self.admin_tabWidget.setCurrentIndex(4)
+            try:
+                sql = "select course_id, course_name, teacher, address from course_software where course_name like '%s'"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.admin_page_5.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.admin_page_5.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.admin_page_5.setRowCount(0)
+            except:
+                print("查询课程失败")
+        cur.close()
+        db.close()
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1623,18 +1701,17 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
             cur.execute(sql)
             datas = cur.fetchall()
             
-
+            row = 0
             for data in datas:
-                prerow = self.teacher_page.rowCount()
-
-                self.teacher_page.setRowCount(prerow+1)
+                self.teacher_page.setRowCount(row+1)
                 for i in range(len(data)):             
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-                    self.teacher_page.setItem(prerow, i, item)
+                    self.teacher_page.setItem(row, i, item)
+                row = row + 1
 
         except:
-            print("显示教师界面失败")
+            print("显示教师界面失败!!")
         cur.close()
         db.close()
     
@@ -1651,15 +1728,14 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
             cur.execute(sql)
             datas = cur.fetchall()
 
-
+            row = 0
             for data in datas:
-                prerow = self.teacher_page_2.rowCount()
-
-                self.teacher_page_2.setRowCount(prerow+1)
+                self.teacher_page_2.setRowCount(row+1)
                 for i in range(len(data)):             
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-                    self.teacher_page_2.setItem(prerow, i, item)
+                    self.teacher_page_2.setItem(row, i, item)
+                row = row + 1
 
         except:
             print("显示课程界面失败")
@@ -1681,15 +1757,14 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
             cur.execute(sql)
             datas = cur.fetchall()
  
-
+            row = 0
             for data in datas:
-                prerow = self.teacher_page_3.rowCount()
-
-                self.teacher_page_3.setRowCount(prerow+1)
+                self.teacher_page_3.setRowCount(row+1)
                 for i in range(len(data)):             
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-                    self.teacher_page_3.setItem(prerow, i, item)
+                    self.teacher_page_3.setItem(row, i, item)
+                row = row + 1
 
         except:
             print("显示实验室界面失败")
@@ -1709,18 +1784,108 @@ class teacher_window(QtWidgets.QWidget, Ui_teacher_window):
             cur.execute(sql)
             datas = cur.fetchall()
 
-
+            row = 0
             for data in datas:
-                prerow = self.teacher_page_4.rowCount()
-                self.teacher_page_4.setRowCount(prerow+1)
+                self.teacher_page_4.setRowCount(row+1)
                 for i in range(len(data)):             
                     item = QTableWidgetItem(str(data[i]))
                     item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-                    self.teacher_page_4.setItem(prerow, i, item)
+                    self.teacher_page_4.setItem(row, i, item)
+                row = row + 1
+
         except:
             print("显示管理员界面失败")
         cur.close()
         db.close()  
+
+    def query_button_clicked(self):
+        db = pymysql.connect(host='localhost', user='root', password='zjq20001215', database='labsoftware')
+        cur = db.cursor()   
+        page = self.comboBox.currentIndex()
+        string = self.lineEdit.text()
+        arg = '%'+string+'%'
+        if page == 1:   
+            self.teacher_tabWidget.setCurrentIndex(0)
+            try:
+                sql = "select * from teacher_course where teacher_name like '%s'"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.teacher_page.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.teacher_page.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.teacher_page.setRowCount(0)
+            except:
+                print("查询教师失败")
+        elif page == 2:
+            self.teacher_tabWidget.setCurrentIndex(1)
+            try:
+                sql = "select course_id, course_name, department, course_period, course_amount from course_software where course_name like '%s'"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.teacher_page_2.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.teacher_page_2.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.teacher_page_2.setRowCount(0)
+
+            except:
+                print("查询课程失败")
+        elif page == 3:
+            self.teacher_tabWidget.setCurrentIndex(2)
+            try:
+                sql = "select lab.lab_id, lab.lab_address, administrator.admin_name, lab_software.equipment_config, lab_software.software from lab_software, administrator, lab where\
+                    lab_software.lab_id=lab.lab_id and lab.admin_id = administrator.admin_id\
+                    and lab.lab_address like '%s' order by lab.lab_id"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.teacher_page_3.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.teacher_page_3.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.teacher_page_3.setRowCount(0)
+
+            except:
+                print("查询实验室失败")
+        elif page == 4:
+            self.teacher_tabWidget.setCurrentIndex(3)
+            try:
+                sql = "select admin_id, admin_name, admin_sex, admin_connect from administrator where admin_name like '%s'"%(arg)
+                cur.execute(sql)
+                datas = cur.fetchall()
+                if datas:
+                    row = 0
+                    for data in datas:
+                        self.teacher_page_4.setRowCount(row+1)
+                        for i in range(len(data)):             
+                            item = QTableWidgetItem(str(data[i]))
+                            item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                            self.teacher_page_4.setItem(row, i, item)
+                        row = row + 1
+                else:
+                    self.teacher_page_4.setRowCount(0)
+            except:
+                print("查询管理员失败")
+        cur.close()
+        db.close()
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -1828,9 +1993,9 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
 
 if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
-    main_window = main_window()
+    # main_window = main_window()
     # main_window = teacher_window()
-    # main_window = admin_window()
+    main_window = admin_window()
     # main_window = coursechange()
     main_window.show()
     sys.exit(app.exec_())
