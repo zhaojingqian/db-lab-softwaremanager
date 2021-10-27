@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets,QtCore,QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt,QPoint
+from PyQt5.QtCore import Qt
 import pymysql
 import sys
 from PyQt5.QtWidgets import *
@@ -79,6 +79,14 @@ class main_window(QtWidgets.QWidget, Ui_main_window):
         self.close()
         self.logon_window = logon_window()
         self.logon_window.show()
+    #彩蛋
+    def easter_egg(self):
+        if self.label.isVisible():
+            self.label.setVisible(False)
+            self.label_2.setVisible(False)
+        else:
+            self.label.setVisible(True)
+            self.label_2.setVisible(True)
 #----------------------------------------------------------
 
 #----------------------------------------------------------
@@ -210,8 +218,8 @@ class admin_window(QtWidgets.QWidget, Ui_admin_window):
         self.updatecourse() 
         self.updateteacher()
         self.updateadmin()
-        # self.comboBox.setCurrentIndex(0)
-        # self.lineEdit.setText('')
+        self.comboBox.setCurrentIndex(0)
+        self.lineEdit.setText('')
 
     def update_admin_info(self):
         #个人信息界面
@@ -1994,8 +2002,5 @@ class change_teacherinfo(QtWidgets.QWidget, Ui_change_teacherinfo):
 if __name__=='__main__':
     app = QtWidgets.QApplication(sys.argv)
     main_window = main_window()
-    # main_window = teacher_window()
-    # main_window = admin_window()
-    # main_window = coursechange()
     main_window.show()
     sys.exit(app.exec_())

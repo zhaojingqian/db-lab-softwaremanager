@@ -52,7 +52,7 @@
     <string>实验室软件管理系统</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -104,7 +104,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -132,6 +132,53 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>600</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(143, 143, 143);
+font: 9pt &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string>开发人员：赵敬乾</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>620</y>
+     <width>241</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(143, 143, 143);
+font: 9pt &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string>联系方式：3040976895@qq.com</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>590</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
